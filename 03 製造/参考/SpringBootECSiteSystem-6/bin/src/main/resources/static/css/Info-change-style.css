@@ -1,0 +1,160 @@
+
+/*initial setup*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 20px;
+    font-family: sans-serif,serif;
+    font-weight: 300;
+    color: #fff;
+    text-rendering: optimizeLegibility;
+    background-color: #fff;
+}
+
+/*reusable component*/
+.row{
+    width: 1140px;
+    margin: 0 auto;
+}
+
+/*header*/
+h1{
+    font-size: 300%;
+}
+
+h1:after{
+    content: " ";
+    display: block;
+    height: 3px;
+    width: 490px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+
+/*main*/
+
+img{
+    height: 150px;
+    float: left;
+    opacity: 0.7;
+    transition: transform 0.3s,opacity 0.3s;
+}
+.main-box{
+    font-size: 90%;
+}
+
+img:hover,
+img:active{
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+
+.system-name{
+    display: inline-block;
+    float: left;
+}
+
+.logo{
+    display: inline-block;
+    float:left;
+}
+
+
+header{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url(img/co-worker-meeting.jpg);
+    background-size: cover;
+    background-position: center;
+    display: block;
+    height: 180vh;
+}
+
+.btn-logout,
+.btn-bottom-1,
+.btn-bottom-2{
+    display: inline-block;
+    border-radius: 100px;
+}
+
+.btn-logout{
+    margin-right: 20%;
+    float: right;
+}
+
+.btn-bottom-1{
+    margin-right: 70px;
+}
+
+.btn-logout a,
+.btn-bottom-1 a,
+.btn-bottom-2 a{
+    text-decoration: none;
+    font-size: 100%;
+    font-weight: 500;
+   
+}
+
+.btn-logout a{
+    background-color: #2980b9;
+    color: #fff;
+    padding: 5px 10px; 
+    border-radius: 100px;
+    
+}
+
+
+.btn-bottom-1 a{
+    background-color: #2980b9;
+    color: #fff;
+    padding: 15px 70px;
+    border-radius: 100px;
+    border: 2px solid #2980b9;
+}
+
+.btn-bottom-2 a{
+    background-color: transparent;
+    color: #2980b9;
+    padding:15px 70px;
+    border-radius: 100px;
+    border: 2px solid #2980b9;
+}
+
+.btn-logout a:hover,
+.btn-bottom-1 a:hover{
+    background-color: #5ca9db;
+}
+
+
+.btn-bottom-2 a:hover{
+    background-color: #5ca9db;
+    color: #fff;
+}
+
+select{
+    color: #555;
+}
+
+input,
+textarea{
+    color: #555;
+}
+
+.btn-bottom{
+    padding-top: 50px;
+    text-align: center;
+}
+
+
+.text{
+    float: left;
+}
+
+textarea{
+    width: 500px;
+    height: 100px;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>技術者稼働変更画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>技術者稼働変更画面</h3>
+    </div>
+<form action="/WorkingStatusStateupdate" method="post">
+<div align="center" >
+<table class="table table-striped">
+<tr>
+	<td>社員番号：</td>
+	<td><input class="form-control" type="text" name="empCd" id="empCd"  th:field="${WorkingStatus.empCd}" readonly /> </td>
+	
+	<td>案件名：</td>
+	<td><input class="form-control" type="text" name="projectName" th:field="${WorkingStatus.projectName}" /></td>
+
+</tr>
+<tr>
+	<td>勤務地：</td>
+	<td><input class="form-control" type="text" name="projectAddress" th:field="${WorkingStatus.projectAddress}" /></td>
+	
+	<td>最寄り駅：</td>
+	<td><input class="form-control" type="text" name="projectStation" th:field="${WorkingStatus.projectStation}" /></td>
+</tr>
+
+<tr>
+	<td>交通費：</td>
+	<td><input class="form-control" type="text" name="transportationFee" th:field="${WorkingStatus.transportationFee}" /></td>
+	
+	<td>作業時間：</td>
+	<td><input class="form-control" type="text" name="workTime" th:value="${WorkingStatus.workTime}" /></td>
+</tr>
+
+<tr>
+	<td>開始日：</td>
+	<td><input class="form-control" type="date" name="startingDay" th:value="${#dates.format(WorkingStatus.startingDay, 'yyyy-MM-dd')}" /></td>
+	
+	<td>終了予定日：</td>
+	<td><input class="form-control" type="date" name="endingDay" th:value="${#dates.format(WorkingStatus.endingDay, 'yyyy-MM-dd')}" /></td>
+</tr>
+
+<tr>
+	<td>上限作業時間：</td>
+	<td><input class="form-control" type="text" name="maxWorkTime" th:field="${WorkingStatus.maxWorkTime}" /></td>
+
+	<td>下限作業時間：</td>
+	<td><input class="form-control" type="text" name="minWorkTime" th:field="${WorkingStatus.minWorkTime}" /></td>
+</tr>
+
+<tr>
+	<td>精算有無：</td>
+	<td><input class="form-control" type="text" name="actuarial" th:field="${WorkingStatus.actuarial}" /></td>
+
+	<td>請求金額：</td>
+	<td><input class="form-control" type="text" name="requestAmount" th:field="${WorkingStatus.requestAmount}" /></td>
+</tr>
+
+<tr>
+	<td>契約先：</td>
+	<td><input class="form-control" type="text" name="contractCompanyAddress" th:field="${WorkingStatus.contractCompanyAddress}" /></td>
+
+	<td>契約会社名：</td>
+	<td><input class="form-control" type="text" name="contractCompanyName" th:field="${WorkingStatus.contractCompanyName}" /></td>
+</tr>
+
+<tr>
+	<td>業務担当部署：</td>
+	<td><input class="form-control" type="text" name="projectDepartment" th:field="${WorkingStatus.projectDepartment}" /></td>
+
+	<td>連絡先担当者：</td>
+	<td><input class="form-control" type="text" name="projecetLeader" th:field="${WorkingStatus.projecetLeader}" /></td>
+</tr>
+
+<tr>
+	<td>連絡先番号：</td>
+	<td><input class="form-control" type="text" name="projectTelNo" th:field="${WorkingStatus.projectTelNo}" /></td>
+
+	<td>連絡先メールアドレス：</td>
+	<td><input class="form-control" type="text" name="projectEmail" th:field="${WorkingStatus.projectEmail}" /></td>
+</tr>
+
+<tr>
+	<td>契約条件：</td>
+	<td><input class="form-control" type="text" name="contractType" th:field="${WorkingStatus.contractType}" /></td>
+
+	<td>支払条件：</td>
+	<td><input class="form-control" type="text" name="paymentTerm" th:field="${WorkingStatus.paymentTerm}" /></td>
+</tr>
+
+<tr>
+	<td>本社担当者：</td>
+	<td><input class="form-control" type="text" name="companyLeader" th:field="${WorkingStatus.companyLeader}" /></td>
+
+	
+</tr>
+<tr>
+	<td>備考：</td>
+	<td colspan="4"><textarea class="form-control" style="height: 100px; width: 75%;"
+							name="workingStatusComment" th:field="${WorkingStatus.workingStatusComment}"/></textarea><br></td>
+	<td></td>
+</tr>
+<tr>
+	<td colspan="4" align="center">
+    <input class="btn btn-success" type="submit" value="確定"/>
+    <input class="btn btn-success" type="button"value="戻る" onClick="window.location.href='./workingstatuslist'"></td>
+	
+</tr>
+
+</table>
+<input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+</div>
+</form>
+</div>
+</body>
+</html>

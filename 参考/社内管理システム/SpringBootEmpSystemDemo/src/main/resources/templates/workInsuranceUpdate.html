@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>雇用保険加入喪失変更画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>雇用保険加入喪失変更画面</h3>
+    </div>
+<form action="/WorkInsuranceStateupdate" method="post">
+<div align="center">
+<table class="table table-striped">
+
+<tr>
+	<td>社員番号：</td>
+	<td><input  class="form-control" type="text" name="empCd" id="empCd"  th:field="${WorkInsurance.empCd}" readonly/> </td>
+
+	<td>加入状況：</td>
+	<td><input  class="form-control" type="text" name="WorkInsuranceState" th:field="${WorkInsurance.workInsuranceState}" /></td>
+
+</tr>
+
+<tr>
+	<td>給与：</td>
+	<td><input  class="form-control" type="text" name="Salary" th:field="${WorkInsurance.Salary}" /></td>
+
+	<td>申請日：</td>
+	<td><input  class="form-control" type="date" name="applicationDate" th:value="${#dates.format(WorkInsurance.applicationDate, 'yyyy-MM-dd')}" /></td>
+</tr>
+
+<tr>
+	<td>取得年月日：</td>
+	<td><input  class="form-control" type="date" name="startingDate" th:value="${#dates.format(WorkInsurance.startingDate, 'yyyy-MM-dd')}" /></td>
+
+	<td>喪失年月日：</td>
+	<td><input  class="form-control" type="date" name="quitDate" th:value="${#dates.format(WorkInsurance.quitDate, 'yyyy-MM-dd')}" /></td>
+</tr>
+
+<tr>
+	<td>被保険番号：</td>
+	<td><input  class="form-control" type="text" name="workInsuranceNo" th:field="${WorkInsurance.workInsuranceNo}" /></td>
+
+	<td>理由：</td>
+	<td><input  class="form-control" type="text" name="reason" th:field="${WorkInsurance.reason}" /></td>
+</tr>
+<tr>
+	<td>備考：</td>
+	<td colspan="4"><textarea class="form-control" style="height: 100px; width: 75%;"
+							name="workInsuranceComment" th:field="${WorkInsurance.workInsuranceComment}"/></textarea><br></td>
+	<td></td>
+</tr>
+
+<tr>
+	<td colspan="4" align="center">
+    <input class="btn btn-success" type="submit" value="確定"/>
+    <input class="btn btn-success" type="button"value="戻る" onClick="window.location.href='./workInsuranceList'"></td>
+
+</tr>
+
+</table>
+<input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+</div>
+</form>
+</div>
+</body>
+</html>

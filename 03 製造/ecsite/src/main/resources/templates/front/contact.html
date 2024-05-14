@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="5aXRj36XqsUcb4HdfUPfO3AhMz4Hkt2MCLr7CH6g">
+
+<title>ECサイト</title>
+
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+
+<link href="./assets/front/css/app.css" rel="stylesheet">
+<script>
+	var laravelSession = {};
+	laravelSession['status'] = '';
+	laravelSession['resent'] = '';
+	var laravelErrors = [];
+</script>
+<script src="./assets/front/js/app.js" defer=""></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script
+	src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+</head>
+
+
+<body>
+	<div id="react-root">
+		<div th:include="./front/header/header.html :: header"></div>
+		<main class="main">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header" th:text="${session.contact_f_001}"></div>
+							<div class="card-body">
+								<form method="POST" enctype="multipart/form-data"
+									action="./contact" th:object="${form}" id="contact-form"
+									class="">
+									<input name="_token" type="hidden" class="form-control"
+										value="5aXRj36XqsUcb4HdfUPfO3AhMz4Hkt2MCLr7CH6g">
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.general_031}"> </span> <span
+												class="required" th:text="${session.general_032}"></span></label>
+											<div class="test-wrap large">
+												<input name="your_name" type="text" class="form-control"
+													aria-invalid="false" th:value="${session.user.getName()}"
+													required>
+												<div class="form-bottom"></div>
+											</div>
+											<p class="error" th:text="${session.general_031}"></p>
+										</div>
+									</div>
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.general_033}"></span> <span
+												class="required" th:text="${session.general_032}"></span></label>
+											<div class="test-wrap large">
+												<input name="email" type="email" class="form-control"
+													aria-invalid="false" th:value="${session.user.getEmail()}"
+													required>
+												<div class="form-bottom"></div>
+											</div>
+											<p class="error" th:text="${session.general_034}"></p>
+										</div>
+									</div>
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.general_035}"></span> <span
+												class="required" th:text="${session.general_032}"></span></label>
+											<div class="radio-wrap">
+												<label class=""><input name="gender" type="radio"
+													class="form-check-input" aria-invalid="false" value="0"
+													required checked> <span
+													th:text="${session.general_036}"></span></label>
+											</div>
+											<div class="radio-wrap">
+												<label class=""><input name="gender" type="radio"
+													class="form-check-input" aria-invalid="false" value="1"
+													required> <span th:text="${session.general_037}"></span></label>
+											</div>
+											<p class="error" th:text="${session.error_002}"></p>
+										</div>
+									</div>
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.general_038}"></span><span
+												class="required" th:text="${session.general_032}"></span></label>
+											<div class="select-wrap">
+												<select name="age" class="form-control" aria-invalid="false"
+													required>
+													<option value="">選択してください</option>
+													<option value="1">～19歳</option>
+													<option value="2">20歳～29歳</option>
+													<option value="3">30歳～39歳</option>
+													<option value="4">40歳～49歳</option>
+													<option value="5">50歳～59歳</option>
+													<option value="6">60歳～</option>
+												</select>
+											</div>
+											<p class="error">年齢を選択してください</p>
+										</div>
+									</div>
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.general_039}"></span> <span
+												class="required" th:text="${session.general_032}"></span></label>
+											<div class="test-wrap large">
+												<input name="title" type="text" class="form-control"
+													aria-invalid="false" value="" required>
+												<div class="form-bottom"></div>
+											</div>
+											<p class="error">タイトルを入力してください</p>
+										</div>
+									</div>
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.contact_002}"></span><span
+												class="required" th:text="${session.general_032}"></span></label>
+											<div class="textarea-wrap large">
+												<textarea name="contact" class="form-control"
+													aria-invalid="false" required></textarea>
+												<div class="form-bottom"></div>
+											</div>
+											<p class="error">本文を入力してください</p>
+										</div>
+									</div>
+									<div class="form-section form-group">
+										<div class="form-section-wrap">
+											<label class="item-name"> <span
+												th:text="${session.general_040}"></span> <span th:text="${session.general_042}"></span></label>
+											<div class="test-wrap large">
+												<input name="url" type="url" class="form-control"
+													aria-invalid="false" value="">
+												<div class="form-bottom"></div>
+											</div>
+											<p class="error"></p>
+										</div>
+									</div>
+									<div class="form-group">
+							          <div class="control-group">
+							           <label class="col-sm-4 control-label">商品画像</label>
+							           <div class="col-sm-4" id="drop-zone">
+							            <p>
+							             <input id="js-uploadImage" type="file" name="image">
+							            </p >
+							             <div id="result">
+							            	<br>
+											<img id="preview" src="" >
+											
+											</div>
+							            <p class="error error-message"></p >
+							           </div>
+							          </div>
+							         </div>
+							         <div class="submit-wrap">
+							          <input class="submit-btn btn btn-info" type="submit"
+							           value="送信する">
+							         </div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<div th:include="./front/footer/footer.html :: footer"></div>
+	</div>
+		<script>
+		 var uploadImageInput = document.getElementById('js-uploadImage');
+		  var previewImg = document.getElementById('preview');
+
+		  uploadImageInput.addEventListener('change', function(event) {
+		    var input = event.target;
+		    var reader = new FileReader();
+		    
+		    reader.onload = function() {
+		      previewImg.src = reader.result;
+		    }
+		    
+		    reader.readAsDataURL(input.files[0]);
+		  });
+			</script>
+	<iframe name="__privateStripeMetricsController6470" frameborder="0"
+		allowtransparency="true" scrolling="no" role="presentation"
+		allow="payment *"
+		src="https://js.stripe.com/v3/m-outer-93afeeb17bc37e711759584dbfc50d47.html#url=https%3A%2F%2Flaraec.isystk.com%2Fcontact&amp;title=LaraEC&amp;referrer=&amp;muid=b180e683-7123-4569-81c5-78422f08302fa34d58&amp;sid=8444d4ea-5190-47b7-9546-ab47a1dded86d0232a&amp;version=6&amp;preview=false"
+		aria-hidden="true" tabindex="-1"
+		style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+</body>
+	
+
+</html>

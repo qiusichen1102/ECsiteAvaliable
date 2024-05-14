@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>商品新規画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>商品新規画面</h3>
+    </div>
+<form action="/add" method="post">
+<div align="center">
+<table class="table table-striped">
+<tr>
+	<td>商品番号：</td>
+	<td><label th:text="${empInfoDetails.empCd}" ></label> </td>
+
+	<td>商品名：</td>
+	<td><input class="form-control" type="text" name="email"  /></td>
+
+</tr>
+
+<tr>
+	<td>商品コード：</td>
+	<td><label th:text="${empInfoDetails.empCd}" ></label> </td>
+
+	<td>カテゴリID：</td>
+	<td> <select>
+    <option value="1"　class="form-control">カテゴリ1</option>
+    <option value="1"　class="form-control">カテゴリ2</option>
+    <option value="1"　class="form-control">カテゴリ3</option>
+    <option value="1"　class="form-control">カテゴリ4</option>
+    <option value="1"　class="form-control">カテゴリ5</option>
+   
+  </select></td>
+</tr>
+
+<tr>
+	<td>メーカーID：</td>
+	<td><select>
+    <option value="1"　class="form-control">メーカー1</option>
+    <option value="1"　class="form-control">メーカー2</option>
+    <option value="1"　class="form-control">メーカー3</option>
+    <option value="1"　class="form-control">メーカー4</option>
+    <option value="1"　class="form-control">メーカー5</option>
+   
+  </select></td>
+
+	<td>商品単価：</td>
+	<td><input class="form-control" type="text" name="country"  /></td>
+</tr>
+
+<tr>
+	<td>在庫数目：</td>
+	<td><input class="form-control" type="text" name="birthday"  /></td>
+
+	<td>商品詳細：</td>
+	<td><input class="form-control" type="text" name="postcode"  /></td>
+</tr>
+
+<tr>
+	<td>商品イメージ：</td>
+	<td>
+<!-- <label for="file" class='btn btn-success'>商品イメージを選んでください</label> -->
+<input type="file"　accept="image/*">
+</td>
+　
+	<td>表示状態：</td>
+	<td><form action="form_action.asp" method="get">
+<input type="radio" name="show" value="show" /> 表示
+<input type="radio" name="show" value="notshow" /> 非表示
+</form>
+</tr>
+
+
+
+<tr>
+	<td colspan="4" align="center">
+    <input  class="btn btn-success" type="button" value="確定" onClick="window.location.href='goodslist.html'"/>
+    <input  class="btn btn-success" type="button"value="戻る" onClick="window.location.href='goodslist.html'"></td>
+</tr>
+
+</table>
+<!-- a 解决add权限不足问题 -->
+ <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+
+</div>
+</form>
+</div>
+</body>
+</html>

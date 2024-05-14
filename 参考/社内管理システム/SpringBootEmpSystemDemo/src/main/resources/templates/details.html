@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>社員詳細画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>社員詳細画面</h3>
+    </div>
+
+<div align="center">
+<table class="table table-striped">
+
+<tr>
+	<td>社員番号：</td>
+	<td><label th:text="${empInfoDetails.empCd}" ></label> </td>
+	
+	<td>個人メールアドレス：</td>
+	<td><label th:text="${empInfoDetails.email}" ></label></td>
+
+</tr>
+<tr>
+	<td>姓名（漢字）：</td>
+	<td><label th:text="${empInfoDetails.nameKanji}" ></label></td>
+	
+	<td>姓名（カナ）：</td>
+	<td><label th:text="${empInfoDetails.nameKana}" ></label></td>
+</tr>
+
+<tr>
+	<td>性別：</td>
+	<td><label th:text="${empInfoDetails.sex}" ></label></td>
+	
+	<td>国籍：</td>
+	<td><label th:text="${empInfoDetails.country}" ></label></td>
+</tr>
+
+<tr>
+	<td>生年月日：</td>
+	<td><label th:text="${#dates.format(empInfoDetails.birthday, 'yyyy-MM-dd')}"></label></td>
+	
+	<td>郵便番号：</td>
+	<td><label th:text="${empInfoDetails.postcode}" ></label></td>
+</tr>
+
+<tr>
+	<td>会社メールアドレス：</td>
+	<td><label th:text="${empInfoDetails.companyEmail}" ></label></td>
+
+	<td>電話番号（「‐」抜き）：</td>
+	<td><label th:text="${empInfoDetails.telNo}" ></label></td>
+</tr>
+
+<tr>
+	<td>住所：</td>
+	<td><label th:text="${empInfoDetails.address}" ></label></td>
+</tr>
+
+<tr>
+	<td>最寄駅：</td>
+	<td><label th:text="${empInfoDetails.homeStation}" ></label></td>
+	<td>社員区分：</td>
+	<td><label th:text="${empInfoDetails.employeeType}" ></label></td>
+</tr>
+
+<tr>
+	<td>入社日付：</td>
+	<td><label th:text="${#dates.format(empInfoDetails.enteringDate, 'yyyy-MM-dd')}" ></label></td>
+	<td>退職日付：</td>
+	<td><label th:text="${#dates.format(empInfoDetails.dimissionDate, 'yyyy-MM-dd')}" ></label></td>
+</tr>
+
+<tr>
+	
+
+	<td>所属会社：</td>
+	<td><label th:text="${empInfoDetails.company}" ></label></td>
+		
+	<td>備考：</td>
+	<td><label th:text="${empInfoDetails.comment}" ></label></td>
+</tr>
+
+<tr>
+	
+
+</tr>
+<tr>
+	<td colspan="4" align="center">
+	<form action="/toUpdate">
+		<input type="hidden" name="id" th:value="${empInfoDetails.empCd}" /> 
+		<input class="btn btn-success" type="submit" value="編集" />
+		<input  class="btn btn-success" type="button" value="戻る" onClick="window.location.href='./list'">
+	</form>
+	
+	</td>
+</tr>
+   <!--  <a th:href="@{/{empCd}/toUpdate(empCd=${empInfoDetails.empCd})}"><input  class="btn btn-success" type="button" value="編集"/></a> -->
+    
+
+
+
+</table>
+</div>
+
+
+
+</div>
+</body>
+</html>

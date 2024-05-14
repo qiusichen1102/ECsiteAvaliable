@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>メーカー情報変更画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>メーカー情報変更画面</h3>
+    </div>
+<form action="/update" method="post">
+<div align="center">
+<table class="table table-striped">
+<tr>
+	
+<label th:text="${empInfoDetails.empCd}" ></label> 
+	</td>
+	<td>メーカー番号：</td>
+	<td><input class="form-control" type="text" name="country" th:field="${empInfo.country}" /></td>
+	<td>メーカー名：</td>
+	<td><input class="form-control" type="text" name="birthday" th:value="${#dates.format(empInfo.birthday, 'yyyy-MM-dd')}" /></td>
+</tr>
+<tr>
+	<td>メーカー詳細：</td>
+	<td><input class="form-control" type="text" name="postcode" th:field="${empInfo.postcode}" /></td>
+
+	<td>表示状態：</td>
+	<td><input class="form-control" type="text" name="postcode" th:field="${empInfo.postcode}" /></td>
+</tr>
+</form>
+	</td>
+</tr>
+
+
+
+<tr>
+	<td colspan="4" align="center">
+    <input class="btn btn-success" type="button" value="確定" onClick="window.location.href='makerlist.html'" />
+    <input class="btn btn-success" type="button"value="戻る" onClick="window.location.href='makerlist.html'"></td>
+
+</tr>
+
+</table>
+<!-- 解决update权限不足问题 -->
+ <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+</div>
+</form>
+</div>
+</body>
+</html>

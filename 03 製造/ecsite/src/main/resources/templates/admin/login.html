@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="8e8c4Ni6clY8hbuW2LmUBkWFJAfXcUP5eirUkPTR">
+
+<title>ログイン｜ECサイト</title>
+
+<script src="./assets/admin/js/app.js"></script>
+<script src="./assets/admin/js/jquery-plugins.js"></script>
+<script src="https://kit.fontawesome.com/b0a875bb13.js"
+	crossorigin="anonymous"></script>
+
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+<link href="./assets/admin/css/app.css" rel="stylesheet">
+<style>
+.error-message {
+	text-align: center;
+	color: red;
+	font-size: 18px;
+}
+</style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+	<div id="app" class="wrapper">
+		<div th:include="./admin/header/header.html :: header"></div>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>ログイン</h1>
+						</div>
+						<div class="col-sm-6"></div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+							<form method="POST" action="./home" th:object="${form}">
+								<input type="hidden" name="_token"
+									value="8e8c4Ni6clY8hbuW2LmUBkWFJAfXcUP5eirUkPTR">
+								<div class="card card-purple">
+									<div class="card-body">
+										<span th:if="${session.message!=null}">
+											<p class="error-message" th:text="${session.message}"></p> <br>
+										</span> <span th:unless="${session.message!=null}">
+											<p class="error-message" style="display: none;"></p>
+										</span>
+										<div class="form-group row">
+											<label for="email"
+												class="col-md-4 col-form-label text-md-right">メールアドレス</label>
+											<div class="col-md-6">
+												<input id="email" type="email" class="form-control "
+													name="email" value="" required autocomplete="email"
+													autofocus placeholder="admin@co.jp">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="password"
+												class="col-md-4 col-form-label text-md-right">パスワード</label>
+											<div class="col-md-6">
+												<input id="password" type="password" class="form-control"
+													name="password" required autocomplete="current-password"
+													pattern="[a-zA-Z0-9]{6,}" title="パスワードは6桁以上の英数字"
+													placeholder="adminadmin">
+
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-6 offset-md-4">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox"
+														name="rememberMe" id="rememberMe"> <label
+														class="form-check-label" for="rememberMe">
+														Remember Me </label>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="card-footer text-center clearfix ">
+										<button type="submit" class="btn btn-danger">ログイン</button>
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:include="./admin/footer/footer.html :: footer"></div>
+	</div>
+</body>
+
+</html>

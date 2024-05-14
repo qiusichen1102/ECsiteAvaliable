@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="xg6VyN2iuqlOhUeYnx1CTDwvtVJiptZJ2q1x6Lap">
+
+<title>お問い合わせ一覧｜ECサイト</title>
+
+<script src="./assets/admin/js/app.js"></script>
+<script src="./assets/admin/js/jquery-plugins.js"></script>
+<script src="https://kit.fontawesome.com/b0a875bb13.js"
+	crossorigin="anonymous"></script>
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+
+<link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+	<div id="app" class="wrapper">
+		<div th:include="./admin/header/header.html :: header"></div>
+
+		<div class="content-wrapper" style="min-height: 712.222px;">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 th:inline="text">お問い合わせID:<span th:text="${contact.id}"></span>の変更</h1>
+						</div>
+						<div class="col-sm-6">
+							<div class="content-header">
+								<div class="container-fluid">
+									<div class="row mb-2">
+										<div class="col-sm-6"></div>
+										<div class="col-sm-6">
+											<ol class="breadcrumb float-sm-right">
+												<li class="breadcrumb-item"><a href="./home"> HOME
+												</a></li>
+												<li class="breadcrumb-item"><a href="./contact_admin">
+														お問い合わせ一覧 </a></li>
+												<li class="breadcrumb-item" >
+												 <a th:href="@{'/contact_detail&'+${contact.id}}" th:text="${session.contact.title}">  
+                                                 </a></li>
+												<li class="breadcrumb-item active"
+													th:text="'お問い合わせID: ' + ${contact.id} + 'の変更'">お問い合わせID:1の変更</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card card-purple">
+								<div class="card-body">
+
+									<form method="POST" enctype="multipart/form-data"
+										action="./contact_admin">
+										<input type="hidden" name="_token"
+											value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO5">
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">氏名</label>
+												<div class="col-sm-12">
+													<input type="text" name="your_name"
+														th:value="${contact.your_name}" placeholder="サンプル太郎"
+														maxlength="100">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">メールアドレス</label>
+												<div class="col-sm-12">
+													<input type="email" name="email"
+														th:value="${contact.email}"
+														placeholder="sample@sample.com" maxlength="100">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">性別</label>
+												<div class="col-sm-12">
+													<label> <input type="radio" name="gender"
+														th:value="${contact.gender}" checked="&quot;checked&quot;">
+														<span>男性</span>
+													</label> <label> <input type="radio" name="gender"
+														value="1"> <span>女性</span>
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">年齢</label>
+												<div class="col-sm-12">
+													<select name="age">
+														<option value="">選択してください</option>
+														<option value="1">～19歳</option>
+														<option value="2" selected="&quot;selected&quot;">20歳～29歳
+														</option>
+														<option value="3">30歳～39歳</option>
+														<option value="4">40歳～49歳</option>
+														<option value="5">50歳～59歳</option>
+														<option value="6">60歳～</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">件名</label>
+												<div class="col-sm-12">
+													<input type="text" name="title" th:value="${contact.title}"
+														maxlength="100">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">お問い合わせ内容</label>
+												<div class="col-sm-12">
+													<textarea name="contact" rows="8" cols="80"
+														th:utext="${contact.contact}"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<label class="col-sm-6 control-label">ホームページURL</label>
+												<div class="col-sm-12">
+													<input type="url" name="url" th:value="${contact.url}"
+														placeholder="https://sample.com" maxlength="100">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+							          <div class="control-group">
+									           <label class="col-sm-4 control-label">商品画像</label>
+									           <div class="col-sm-4" id="drop-zone">
+									            <p>
+									             <input id="js-uploadImage" type="file" name="image">
+									            </p >
+									             <div id="result">
+									            	<br>
+													<img id="preview" th:src="@{/imgDownloadContact(contactname=${session.contact.file_name})}" width="200px">
+													
+													</div>
+									            <p class="error error-message"></p >
+									           </div>
+									          </div>
+									         </div>
+										<div class="form-group">
+											<div class="control-group" id="userName">
+												<p>
+													<input type="hidden" name="id" th:value="${contact.id}">
+												</p>
+											</div>
+										</div>
+
+										<div class="card-footer text-center clearfix ">
+											<input class="btn btn-info" type="submit" value="登録する">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:include="./admin/footer/footer.html :: footer"></div>
+		</div>
+
+
+		<div id="sidebar-overlay"></div>
+	</div>
+	<script>
+		 var uploadImageInput = document.getElementById('js-uploadImage');
+		  var previewImg = document.getElementById('preview');
+
+		  uploadImageInput.addEventListener('change', function(event) {
+		    var input = event.target;
+		    var reader = new FileReader();
+		    
+		    reader.onload = function() {
+		      previewImg.src = reader.result;
+		    }
+		    
+		    reader.readAsDataURL(input.files[0]);
+		  });
+			</script>
+</body>
+
+</html>

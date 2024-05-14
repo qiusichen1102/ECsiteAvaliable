@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>年金国保一覧画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/newStyle.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+function fileCheck(){
+	var file = document.getElementsByName('filename')[0].value;
+	if(file.length>0){
+		document.getElementById('importButton').disabled=false;
+	}else{
+		document.getElementById('importButton').disabled=true;
+	}
+}
+</script>
+<script>
+function fileCheck(){
+	var file = document.getElementsByName('filename')[0].value;
+	if(file.length>0){
+		document.getElementById('importButton').disabled=false;
+	}else{
+		document.getElementById('importButton').disabled=true;
+	}
+}
+</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="bg-primary">
+			<h3>年金国保一覧画面</h3>
+		</div>
+
+		<!-- 機能 -->
+		<div class="row">
+			<input class="btn btn-primary" value="戻る" size="3"
+				onclick="location.href='./menu'">
+		</div>
+
+
+		<div id="div">
+			<form action="retailsearch" method="get">
+				<div class="form-group">
+					<div class="form-search">
+						<input type="text" class="form-search" name="keyword" id="txtname"
+							placeholder="社員番号/名前" th:value="${keyword}"> <input
+							type="submit" value="検索" class="btn btn-primary">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="export">
+			<a href="/excelExport">
+				<button type="button" class="btn btn-primary" name="retail" th:if="${countEmployee}"  >エクスポート</button>
+			</a>
+			<form class="form-horizontal" id="form_table" action="/excelImport"
+				enctype="multipart/form-data" method="post" style="display: inline;">
+				<button type="submit" class="btn btn-primary" id="importButton"
+					disabled>インポート</button>
+
+				<input class="form-input" type="file" name="filename"
+					style="display: inline;" oninput="fileCheck()"
+					 accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></input> <input
+					type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+			</form>
+
+
+		</div>
+	</div>
+	<br />
+
+	<!-- 社員リスト -->
+	<div align="center" class="table-responsive">
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th><div align="center">社員番号</div></th>
+					<th><div align="center">加入状況</div></th>
+					<th><div align="center">加入基準</div></th>
+					<th><div align="center">申請日</div></th>
+					<th><div align="center">取得年月日</div></th>
+					<th><div align="center">喪失年月日</div></th>
+					<th><div align="center">年金手帳</div></th>
+					<th><div align="center">健康保険</div></th>
+					<th><div align="center">備考/理由</div></th>
+					<th colspan="2"><div align="center">操作</div></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="retire:${retailList}" th:var="retire" bgcolor="white"
+					class="y" th:if="${countEmployee}">
+					<td>
+						<form action="/toRetailDetails">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${retire.getEmpCd()}" />
+								<input class="btn btn-primary" type="submit"
+									th:value="${retire.getEmpCd()}" />
+							</div>
+						</form>
+					</td>
+					<!-- <td><a th:href="@{/{empCd}/retailDetails(empCd=${retire.empCd})}">
+					<div align="center">[[${retire.getEmpCd()}]]</div></a></td> -->
+					<td><div align="center">[[${retire.getState()}]]</div></td>
+					<td><div align="center">[[${retire.getInsuranceLine()}]]</div></td>
+					<td><div align="center">[[${#dates.format(retire.getApplicationDate(),'yyyy-MM-dd')}]]</div></td>
+					<td><div align="center">[[${#dates.format(retire.getStartingDate(),'yyyy-MM-dd')}]]</div></td>
+					<td><div align="center">[[${#dates.format(retire.getQuitDate(),'yyyy-MM-dd')}]]</div></td>
+					<td><div align="center">[[${retire.getInturanceNote()}]]</div></td>
+					<td><div align="center">[[${retire.getHealthInsurance()}]]</div></td>
+					<td><div align="center">[[${retire.getRetirementPayAndHealthInsuranceComment()}]]</div></td>
+
+					<!--変更-->
+					<td>
+						<form action="/toRetailUpdate">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${retire.empCd}" /> <input
+									class="btn btn-primary" type="submit" value="編集" />
+							</div>
+						</form>
+					</td>
+
+					<!--削除-->
+					<td>
+						<form action="retaildelete">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${retire.empCd}" /> <input
+									class="btn btn-primary" type="submit" value="削除"
+									onClick="return delete_confirm()" />
+							</div>
+						</form>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: center; vertical-align: middel;">
+		<form action="retailList" method="get">
+			<p>
+				社員数：<label th:text="${countEmployee}"></label>名
+				<!-- 共<label th:text="${pageTotalNum}"></label> ページ　 -->
+				<!-- 毎ページ項目数： -->
+				<input type="hidden" name="pageSize" th:value="${pageSize}">
+				<!-- 現在ページ： -->
+				<input type="hidden" name="pageNum" th:value="${pageNum}">
+				<!-- <input type="submit" value="ToGo" class="btn btn-primary" name="buttom"> -->
+				<input type="submit" value="前へ"
+					class="btn btn-primary"	name="button"	th:unless="${firstPage}">
+				 <input type="submit" value="次へ"
+					class="btn btn-primary" name="button" th:unless="${lastPage}">
+			</p>
+		</form>
+	</div>
+	<script type="text/javascript">
+		//削除確認メセージ
+		function delete_confirm() {
+			if (window.confirm('項目を削除します。よろしいですが？')) {
+				//alert("確認");
+				return true;
+			} else {
+				//alert("キャンセル");
+				return false;
+			}
+		}
+	</script>
+
+</body>
+</html>

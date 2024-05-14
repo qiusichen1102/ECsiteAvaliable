@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.demo.mapper.LoginMapper">
+	<!-- getEmpInfoByEmpCd -->
+	<select id="getList"
+		resultType="com.company.demo.bean.LoginUser">
+		SELECT * FROM t_login
+	</select>
+	<!-- <select id="search_empCd"
+		resultType="com.company.demo.bean.EmpInfo">
+		SELECT * FROM t_empinfo
+		<if test="keyword != null and keyword != ''">
+			WHERE CONCAT(t_empinfo.empCd,t_empinfo.nameKanji,t_empinfo.nameKana)
+			LIKE "%" #{keyword} "%"
+		</if>
+	</select> -->
+
+	<delete id="loginDelete">
+		DELETE FROM t_login WHERE
+		account_id= #{account_id}
+	</delete>
+
+	<!-- getEmpInfoByEmpCd -->
+	<select id="getInfoByAccount_id" parameterType="String"
+		resultType="com.company.demo.bean.LoginUser">
+		SELECT
+		*
+		FROM
+		t_login
+		WHERE account_id=#{account_id}
+	</select>
+
+	<!-- add -->
+	<insert id="addLogin">
+		INSERT INTO
+		 t_login
+		(account_id,role_id,password)
+
+		VALUES
+		(#{account_id},#{role_id},#{password})
+	</insert>
+
+	<!-- <insert id="addEngineerList">
+	INSERT INTO
+	t_engineerlist (empCd)
+	VALUES (#{empCd})
+	</insert>
+
+	<insert id="addHumanResource">
+	INSERT INTO
+	t_humanresource (empCd)
+	VALUES (#{empCd})
+	</insert>
+
+	<insert id="addRetirementPayAndHealthInsurance">
+	INSERT INTO
+	t_retirementpayandhealthinsurance (empCd)
+	VALUES (#{empCd})
+	</insert>
+
+	<insert id="addWorkingStatus">
+	INSERT INTO
+	t_workingstatus (empCd)
+	VALUES (#{empCd})
+	</insert>
+
+	<insert id="addWorkInsurance">
+	INSERT INTO
+	t_workinsurance (empCd)
+	VALUES (#{empCd})
+	</insert>
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<update id="updateLogin"
+		parameterType="com.company.demo.bean.LoginUser">
+		UPDATE t_login SET
+		account_id=#{account_id},role_id=#{role_id},password=#{password}
+		WHERE account_id = #{account_id}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja" style="height: auto;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="8e8c4Ni6clY8hbuW2LmUBkWFJAfXcUP5eirUkPTR">
+
+    <title>ログイン｜ECサイト</title>
+
+    <script src="./assets/admin/js/app.js"></script>
+    <script src="./assets/admin/js/jquery-plugins.js"></script>
+    <script src="https://kit.fontawesome.com/b0a875bb13.js" crossorigin="anonymous"></script>
+
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+<div id="app" class="wrapper">
+<div th:include="./admin/header/header.html :: header"></div>
+
+        <div class="content-wrapper" style="min-height: 712.222px;">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>HOME</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-right">
+                                                <li class="breadcrumb-item active">
+                                                    HOME
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="card card-purple">
+                                <div class="card-body">
+                                    <p th:text="'ようこそ！'+${session.adminUser.getName()}"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div th:include="./admin/footer/footer.html :: footer"></div>
+        <div id="sidebar-overlay"></div>
+    </div>
+
+
+</body>
+
+</html>

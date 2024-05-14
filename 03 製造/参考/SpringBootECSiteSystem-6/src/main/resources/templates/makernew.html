@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>メーカー新規画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>メーカー新規画面</h3>
+    </div>
+<form action="/Toadd" method="post" th:object="${form}">
+<div align="center">
+<table class="table table-striped">
+<tr>
+	<td>メーカーID：</td>
+	<td><input class="form-control" type="text" name="manufacture_id" th:field="*{manufacture_id}" onkeydown="eraseInfo();" /></td>
+
+	<td>メーカー名：</td>
+	<td><input class="form-control" type="text" name="manufacture_name" th:field="*{manufacture_name}" onkeydown="eraseInfo();" /></td>
+
+</tr>
+<tr>
+	<td>メーカー詳細：</td>
+	<td><input class="form-control" type="text" name="about_manufacture" th:field="*{about_manufacture}" onkeydown="eraseInfo();" /> </td>
+	<td>表示状態：</td>
+	<td><input class="form-control" type="text" name="publication_status" th:field="*{publication_status}" onkeydown="eraseInfo();" /></td>
+</tr>
+<tr>
+
+	<td colspan="4" align="center">
+    <input  class="btn btn-success" type="submit" value="確定" >
+    <input class="btn btn-success" type="button" value="戻る" onClick="window.location.href='./MakerList'">
+    
+ 	<div class="text-right" >
+		<table>
+			<tr th:inline="text" th:each="message : ${errorList}">
+				<td><font color="red">[[${message.defaultMessage}]]</font></td>
+			</tr>
+			<tr>
+				<td th:text="${message}" style="color:red;"></td>
+			</tr>
+		</table>
+	</div>
+</tr>
+
+</table>
+</form>
+<!-- a 解决add权限不足问题 -->
+</div>
+
+</body>
+</html>

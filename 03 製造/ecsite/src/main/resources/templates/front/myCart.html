@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="5aXRj36XqsUcb4HdfUPfO3AhMz4Hkt2MCLr7CH6g">
+
+    <title>ECサイト</title>
+
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link href="./assets/front/css/app.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="react-root">
+    <div th:include="./front/header/header.html :: header"></div>
+    <main class="main">
+        <div class="contentsArea">
+             <span th:unless="${session.carts!=null}">
+            <h2 class="heading02">お客様のカートに商品はありません。</h2>
+             </span>
+            <span th:if="${session.carts!=null}">
+            <h2 class="heading02" th:text="${session.user.getName()}+'さんのカートの中身'"></h2>
+             </span>
+            <div>
+                <p class="text-center mt20"></p><br>
+
+                    <div class="block01" >
+                        <div class="block01_item" th:each="carts : ${session.carts}">
+                            <img th:src="@{/imgDownloadCart(cartsId=${carts.id})}" alt="" class="block01_img">
+                            <p th:text="${carts.name}"></p>
+                            <p th:text="${carts.detail}"> </p>
+                            <p class="c-red mb20" th:text="${carts.price}+'円'"> </p>
+                            <form th:action="@{'/delete&'+${carts.id}}" method="post">
+                            <input type="submit" class="btn-01" value="カートから削除する">
+                            </form>
+                        </div>
+                    </div>
+                   
+                <span th:if="${session.carts!=null}">
+                 <div class="block02">
+                        <p th:text="'合計個数：'+${session.cartKazu}+'個'"></p>
+                        <p style="font-size: 1.2em; font-weight: bold;"
+                           th:text="'合計金額：'+${session.price}+'円'"></p>
+                    </div>
+                <form action="/myCart2" method="post">
+                    <div style="margin: 40px 15px; text-align: center;"><button type="submit" class="btn btn-primary">決済をする</button></div>
+                </form>
+                </span>
+                <p class="mt30 ta-center"><a href="./index2" class="text-danger btn">商品一覧へ戻る</a></p>
+            </div>
+        </div>
+    </main>
+    <div th:include="./front/footer/footer.html :: footer"></div>
+    <div class="isystk-overlay "><button type="button" class="close" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+        <div style="padding: 20px;">
+            <h2 style="font-size: 16px; text-align: center; font-weight: bold;">決済情報の入力</h2>
+            <form class=""><input name="_token" type="hidden" class="form-control"
+                                  value="5aXRj36XqsUcb4HdfUPfO3AhMz4Hkt2MCLr7CH6g">
+                <div class="form-group"><label class="">金額</label>
+                    <p>89800円</p>
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="form-group"><label class="">メールアドレス</label>
+                    <p>test1@test.com</p><input name="username" type="hidden" class="form-control"
+                                                aria-invalid="false" value="test1@test.com">
+                    <div class="invalid-feedback"></div>
+                </div>
+                <legend class="col-form-label">カード番号</legend>
+                <div class="p-2 bg-light StripeElement StripeElement--empty">
+                    <div class="__PrivateStripeElement"
+                         style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                        <iframe name="__privateStripeFrame9386" frameborder="0" allowtransparency="true"
+                                scrolling="no" role="presentation" allow="payment *"
+                                src="https://js.stripe.com/v3/elements-inner-card-ad3ee188269a1dc8804b8574bbfe4876.html#wait=false&amp;mids[guid]=26dd2d65-69b0-4f3b-859e-5f30dd1ca0ed48eb57&amp;mids[muid]=b180e683-7123-4569-81c5-78422f08302fa34d58&amp;mids[sid]=8444d4ea-5190-47b7-9546-ab47a1dded86d0232a&amp;rtl=false&amp;componentName=cardNumber&amp;keyMode=test&amp;apiKey=pk_test_51IUjMQEWvDFIQrjw9I78tYFts6gH2ogYAycgX3EbVV29uYR8UvsnV9n85iY6H1CkpSyDaptmenTa4uYosScfcImP00PBPli2zM&amp;referrer=https%3A%2F%2Flaraec.isystk.com%2Fmycart&amp;controllerId=__privateStripeController9381"
+                                title="セキュアなカード番号入力フレーム"
+                                style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 16.8px;"></iframe><input
+                            class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" "
+                            autocomplete="false" maxlength="1"
+                            style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
+                    </div>
+                </div>
+                <legend class="col-form-label">有効期限</legend>
+                <div class="p-2 bg-light StripeElement StripeElement--empty">
+                    <div class="__PrivateStripeElement"
+                         style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                        <iframe name="__privateStripeFrame9387" frameborder="0" allowtransparency="true"
+                                scrolling="no" role="presentation" allow="payment *"
+                                src="https://js.stripe.com/v3/elements-inner-card-ad3ee188269a1dc8804b8574bbfe4876.html#wait=false&amp;mids[guid]=26dd2d65-69b0-4f3b-859e-5f30dd1ca0ed48eb57&amp;mids[muid]=b180e683-7123-4569-81c5-78422f08302fa34d58&amp;mids[sid]=8444d4ea-5190-47b7-9546-ab47a1dded86d0232a&amp;rtl=false&amp;componentName=cardExpiry&amp;keyMode=test&amp;apiKey=pk_test_51IUjMQEWvDFIQrjw9I78tYFts6gH2ogYAycgX3EbVV29uYR8UvsnV9n85iY6H1CkpSyDaptmenTa4uYosScfcImP00PBPli2zM&amp;referrer=https%3A%2F%2Flaraec.isystk.com%2Fmycart&amp;controllerId=__privateStripeController9381"
+                                title="セキュアな有効期限入力フレーム"
+                                style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 16.8px;"></iframe><input
+                            class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" "
+                            autocomplete="false" maxlength="1"
+                            style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
+                    </div>
+                </div>
+                <legend class="col-form-label">セキュリティーコード</legend>
+                <div class="p-2 bg-light StripeElement StripeElement--empty">
+                    <div class="__PrivateStripeElement"
+                         style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                        <iframe name="__privateStripeFrame9388" frameborder="0" allowtransparency="true"
+                                scrolling="no" role="presentation" allow="payment *"
+                                src="https://js.stripe.com/v3/elements-inner-card-ad3ee188269a1dc8804b8574bbfe4876.html#wait=false&amp;mids[guid]=26dd2d65-69b0-4f3b-859e-5f30dd1ca0ed48eb57&amp;mids[muid]=b180e683-7123-4569-81c5-78422f08302fa34d58&amp;mids[sid]=8444d4ea-5190-47b7-9546-ab47a1dded86d0232a&amp;rtl=false&amp;componentName=cardCvc&amp;keyMode=test&amp;apiKey=pk_test_51IUjMQEWvDFIQrjw9I78tYFts6gH2ogYAycgX3EbVV29uYR8UvsnV9n85iY6H1CkpSyDaptmenTa4uYosScfcImP00PBPli2zM&amp;referrer=https%3A%2F%2Flaraec.isystk.com%2Fmycart&amp;controllerId=__privateStripeController9381"
+                                title="セキュアな CVC 入力フレーム"
+                                style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; transform: translate(0px) !important; color-scheme: light only !important; height: 16.8px;"></iframe><input
+                            class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" "
+                            autocomplete="false" maxlength="1"
+                            style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: -1px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
+                    </div>
+                </div>
+                <p class="text-center"><button class="my-3 btn btn-primary">購入</button></p>
+            </form>
+            <p class="fz-s">テスト用クレジットカード番号<br>5555555555554444</p>
+        </div>
+    </div>
+</div>
+<script>
+    var laravelSession = {};
+    laravelSession['status'] = '';
+    laravelSession['resent'] = '';
+    var laravelErrors = [];
+</script>
+<script src="./assets/front/js/app.js" defer=""></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+
+
+<iframe name="__privateStripeMetricsController9380" frameborder="0" allowtransparency="true" scrolling="no"
+        role="presentation" allow="payment *"
+        src="https://js.stripe.com/v3/m-outer-93afeeb17bc37e711759584dbfc50d47.html#url=https%3A%2F%2Flaraec.isystk.com%2Fhome&amp;title=LaraEC&amp;referrer=https%3A%2F%2Flaraec.isystk.com%2Flogin&amp;muid=b180e683-7123-4569-81c5-78422f08302fa34d58&amp;sid=8444d4ea-5190-47b7-9546-ab47a1dded86d0232a&amp;version=6&amp;preview=false"
+        aria-hidden="true" tabindex="-1"
+        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe><iframe
+        name="__privateStripeController9381" frameborder="0" allowtransparency="true" scrolling="no" role="presentation"
+        allow="payment *"
+        src="https://js.stripe.com/v3/controller-da48732248638df288726a142b6e91f4.html#apiKey=pk_test_51IUjMQEWvDFIQrjw9I78tYFts6gH2ogYAycgX3EbVV29uYR8UvsnV9n85iY6H1CkpSyDaptmenTa4uYosScfcImP00PBPli2zM&amp;stripeJsId=b7d2f37b-0b25-49ba-812e-b490c4d474bf&amp;stripeJsLoadTime=1682210313717&amp;referrer=https%3A%2F%2Flaraec.isystk.com%2Fmycart&amp;controllerId=__privateStripeController9381"
+        aria-hidden="true" tabindex="-1"
+        style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+</body>
+
+</html>

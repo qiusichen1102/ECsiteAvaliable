@@ -1,0 +1,10 @@
+spring:
+  profiles: local
+
+server:
+  address: localhost
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: ../htdocs/thumb

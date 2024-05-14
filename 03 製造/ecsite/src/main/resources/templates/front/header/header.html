@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link href="./assets/front/css/app.css" rel="stylesheet">
+</head>
+<body>
+<div id="react-root" th:fragment="header">
+    <header class="header shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white headerNav"><a class="header_logo"
+                                                                                href="./index"><img src="./assets/front/image/logo.png" alt="" class=""></a>
+            <div class="" id="navbarSupportedContent">
+            <span th:unless="${session.user!=null}">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="btn btn-danger mr-3" href="./login">ログイン</a></li>
+                    <li class="nav-item"><a class="btn btn-link text-danger" href="./register">新規登録</a></li>
+                    <li class="nav-item"><a class="btn btn-link text-danger" href="./contact">お問い合わせ</a></li>
+                </ul>
+            </span>
+                <style>
+                    .menuBtn {
+                        display: none;
+                        padding: 5px;
+                        font-size: 14px;
+                        font-weight: 40;
+                        text-align: center;
+                    }
+
+                    .dropdown.show .menuBtn {
+                        display: block
+                    }
+                </style>
+                <span th:if="${session.user!=null}">
+                <ul class="navbar-nav ml-auto btn-list-group">
+                    <div class="nav-item dropdown">
+                        <a aria-haspopup="true" aria-expanded="false" id="logout-nav"
+                           href="#" class="dropdown-toggle nav-link" role="button"
+                           th:text="${session.user.getName()}"></a>
+                        <div class="menuBtn">
+                            <a href="./logOut">ログアウト</a>
+                        </div>
+                    </div>
+                    <a href="./myCart"><img src="./assets/front/image/cart.png"
+                                            class="cartImg ml-3"></a>
+                    <li class="nav-item"><a class="btn btn-link text-danger"
+                                            href="./contact">お問い合わせ</a></li>
+                </ul>
+            </span>
+            </div>
+            <div class="menu-btn">
+                <figure></figure>
+                <figure></figure>
+                <figure></figure>
+            </div>
+            <div id="side-menu" class="">
+                <div class="side-menu-header">
+                    <p style="margin: 20px; font-size: 16px;"></p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="./login">ログイン</a></li>
+                        <li><a href="./register">新規登録</a></li>
+                        <li><a href="./contact">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="layer-panel" class=""></div>
+        </nav>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.getElementById('logout-nav');
+            const menuBtn = document.querySelector('.menuBtn');
+
+            dropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                menuBtn.style.display = (menuBtn.style.display === 'block') ? 'none' : 'block';
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="8e8c4Ni6clY8hbuW2LmUBkWFJAfXcUP5eirUkPTR">
+
+    <title>ログイン｜ECサイト</title>
+
+    <script src="./assets/admin/js/app.js"></script>
+    <script src="./assets/admin/js/jquery-plugins.js"></script>
+    <script src="https://kit.fontawesome.com/b0a875bb13.js" crossorigin="anonymous"></script>
+
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+    <div id="app" class="wrapper">
+        <div th:include="./admin/header/header.html :: header"></div>
+
+        <div class="content-wrapper" style="min-height: 712.222px;">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>マカロンの変更</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-right">
+                                                <li class="breadcrumb-item">
+                                                    <a href="./home">
+                                                        HOME
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="./stock">
+                                                        商品一覧
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <a th:href="@{'/stock_detail&'+${session.stock.id}}" th:text="${stock.name}">  
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item active" th:text="${stock.name}+'の変更'">
+
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+
+
+                            <form method="POST" enctype="multipart/form-data"
+                                  th:action="@{'/stock_update&'+${stock.id}}" th:Object="${from}">
+                                <input type="hidden" name="_token" value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4">
+                                <div class="card card-purple">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="control-group">
+                                                <label class="col-sm-2 control-label">商品名</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="name" th:value="${stock.name}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-group">
+                                                <label class="col-sm-2 control-label">商品説明</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="detail" rows="8"
+                                                        cols="80" th:text="${stock.detail}"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-group">
+                                                <label class="col-sm-2 control-label">価格</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="price" th:value="${stock.price}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-group">
+                                                <label class="col-sm-2 control-label">在庫数</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="quantity" th:value="${stock.quantity}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-group">
+                                                <label class="col-sm-2 control-label">商品画像</label>
+                                                <div class="col-sm-2" id="drop-zone">
+
+                                                    <p><input id="js-uploadImage" type="file" name="file"></p>
+                                                    <div id="result">
+                                                       <img th:src="@{/imgDownload(stockid=${stock.id})}" alt="" width="200px"
+                                                    id="stockImage">
+                                                    </div>
+                                                    <p class="error error-message"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center clearfix ">
+                                        <input class="btn btn-info" type="submit" value="登録する">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="./admin/footer/footer.html :: footer"></div>
+        <div id="sidebar-overlay"></div>
+    </div>
+    <script>
+        $(function () {
+            // 画像ファイルアップロード
+            $('#js-uploadImage').imageUploader({
+                dropAreaSelector: '#drop-zone',
+                successCallback: function (res) {
+
+                    $('#result').empty();
+                    $('#result').append('<img src="' + res.fileData + '" width="200px" />');
+                    $('#result').append('<input type="hidden" name="imageBase64" value="' + res.fileData + '" />');
+                    $('#result').append('<input type="hidden" name="fileName" value="' + res.fileName + '" />');
+
+                    $('.error-message').empty();
+                },
+                errorCallback: function (res) {
+                    $('.error-message').text(res[0]);
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

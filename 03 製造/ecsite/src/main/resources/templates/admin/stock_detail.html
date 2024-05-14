@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="8e8c4Ni6clY8hbuW2LmUBkWFJAfXcUP5eirUkPTR">
+
+    <title>ログイン｜ECサイト</title>
+
+    <script src="./assets/admin/js/app.js"></script>
+    <script src="./assets/admin/js/jquery-plugins.js"></script>
+    <script src="https://kit.fontawesome.com/b0a875bb13.js" crossorigin="anonymous"></script>
+
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+    <div id="app" class="wrapper">
+        <div th:include="./admin/header/header.html :: header"></div>
+
+        <div class="content-wrapper" style="min-height: 712.222px;">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 th:text="${session.stock.name}"></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-right">
+                                                <li class="breadcrumb-item">
+                                                    <a href="./home">
+                                                        HOME
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="./stock">
+                                                        商品一覧
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item active" th:text="${session.stock.name}">
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="card card-purple">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">商品名</label>
+                                            <div class="col-sm-4" th:text="${session.stock.name}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">商品説明</label>
+                                            <div class="col-sm-4" th:text="${session.stock.detail}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">価格</label>
+                                            <div class="col-sm-4" th:text="${session.stock.price}+'円'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">在庫数</label>
+                                            <div class="col-sm-4" th:text="${session.stock.quantity}+'個'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">商品画像</label>
+                                            <div class="col-sm-4" id="result">
+                                                <img th:src="@{/imgDownload(stockid=${session.stock.id})}" alt="" width="200px"
+                                                    id="stockImage">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center clearfix ">
+                                    <form method="GET" th:action="@{'/stock_edit&'+${session.stock.id}}">
+                                        <input type="hidden" name="_token"
+                                            value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4"> <input
+                                            class="btn btn-info" type="submit" value="変更する">
+                                    </form>
+                                    <form method="POST" th:action="@{'/stock_delete&'+${session.stock.id}}" id="delete_1">
+                                        <input type="hidden" name="_token"
+                                            value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4"> <a href="#"
+                                            class="btn btn-danger js-deleteBtn" data-id="1">削除する</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="./admin/footer/footer.html :: footer"></div>
+        <div id="sidebar-overlay"></div>
+    </div>
+    <script>
+        $(function () {
+            // 削除確認用のダイアログを表示
+            $('.js-deleteBtn').click(function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                if (confirm('本当に削除していいですか？')) {
+                    $('#delete_' + id).submit();
+                }
+            });
+        });
+
+        let imgElement = document.getElementById("stockImage");
+        let uploadedImagePath = imgElement.src;
+        console.log(uploadedImagePath);
+    </script>
+</body>
+
+</html>

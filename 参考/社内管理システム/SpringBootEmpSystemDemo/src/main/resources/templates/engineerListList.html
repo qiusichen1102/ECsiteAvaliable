@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>営業対象一覧</title>
+
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/newStyle.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="./js/script.js"></script>
+<script type="text/javascript">
+
+
+	window.onload = function () {
+	var date = new Date();
+	var m = date.getMonth();
+    var dateSelectObj = document.getElementById("Mmonth");
+    for (var i = 0; i < 6; i++) {
+        var optionText = m + 1+ i + "月";
+        var optionElement = document.createElement("option");
+        optionElement.textContent = optionText;
+        optionElement.value = m + 1+i;
+        dateSelectObj.appendChild(optionElement);
+    }
+
+
+
+
+	}
+</script>
+
+
+
+</head>
+<body>
+
+
+
+
+	<div class="container-fluid">
+		<div class="bg-primary" align="center">
+			<h3>営業対象一覧</h3>
+		</div>
+
+		<!-- 機能 -->
+		<div class="row">
+			<input class="btn btn-primary" value="戻る" size="3"
+				style="margin-right: 20px" onclick="location.href='./menu'">
+
+			<!-- <table border="0" style="margin-top:4px; margin-left: 18px">
+            <tr>
+                <td><a href="#" class="easyui-linkbutton" onclick="downloadfile();">数据导出</a></td>
+
+            </tr>
+
+        </table> -->
+
+		</div>
+
+
+		<!-- style="margin-left: 10px" -->
+
+		<div id="div">
+			<form action="engineerList_search" method="get">
+				<div class="form-group" style="margin-top: 30px">
+					<div class="form-search">
+						<input type="text" class="form-search" name="keyword" id="txtname"
+							placeholder="社員番号/名前" th:value="${keyword}"> <input
+							type="submit" value="検索" class="btn btn-primary"> <select
+							id="Mmonth" name="month"
+							onchange="javascript:this.form.submit();">
+							<option value="">稼働開始月</option>
+						</select>
+					</div>
+				</div>
+
+			</form>
+		</div>
+		<div class="export">
+			<a href="/eexcelExport" style="margin-right: 10px">
+				<button type="button" id="exportButton" name="engineer"
+					class="btn btn-primary" style="margin-right: 10px;"
+					th:if="${countEmployee}" onclick="Check()">エクスポート</button>
+
+			</a>
+			<form class="form-horizontal" id="form_table" action="/eexcelImport"
+				enctype="multipart/form-data" method="post" style="display: inline;">
+				<button type="submit" id="importButton" class="btn btn-primary"
+					style="margin-right: 10px;" disabled>インポート</button>
+				<input class="form-input" type="file" name="filename"
+					style="display: inline;" oninput="fileCheck()"
+					accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></input>
+				<input type="hidden" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+			</form>
+		</div>
+
+	</div>
+
+	<!-- 社員リスト -->
+	<div align="center" class="table-responsive" style="margin-top: 30px;">
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th><div align="center">社員番号</div></th>
+					<th><div align="center">名前</div></th>
+					<th><div align="center">性別</div></th>
+					<th><div align="center">最寄駅</div></th>
+					<th><div align="center">稼働開始日</div></th>
+
+					<th><div align="center">実務年数</div></th>
+					<th><div align="center">日本語</div></th>
+					<th><div align="center">メイン言語</div></th>
+					<th><div align="center">基本設計</div></th>
+					<th><div align="center">詳細設計</div></th>
+
+					<th><div align="center">製造</div></th>
+					<th><div align="center">テスト</div></th>
+					<th><div align="center">現在現場</div></th>
+					<th><div align="center">レベル</div></th>
+					<th><div align="center">新人</div></th>
+					<th><div align="center">備考</div></th>
+					<th colspan="2"><div align="center">操作</div></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="engineerList:${engineerListList}" th:var="engineerList"
+					bgcolor="white" class="y" th:if="${countEmployee}">
+					<td>
+						<form action="/toEngineerListDetails">
+							<div align="center">
+								<input type="hidden" name="id"
+									th:value="${engineerList.getEmpCd()}" /> <input
+									class="btn btn-primary" type="submit"
+									th:value="${engineerList.getEmpCd()}" />
+							</div>
+						</form>
+					</td>
+					<!-- <td><a th:href="@{/{empCd}/engineerListDetails(empCd=${engineerList.getEmpCd()})}"><div align="center">[[${engineerList.getEmpCd()}]]</div></a></td> -->
+					<td><div align="center">[[${engineerList.getNameKanji()}]]</div></td>
+					<td><div align="center">[[${engineerList.getSex()}]]</div></td>
+					<td><div align="center">[[${engineerList.getHomeStation()}]]</div></td>
+					<td><div align="center">[[${#dates.format(engineerList.getWorkingDate(),'yyyy-MM-dd')}]]</div></td>
+
+					<td><div align="center">[[${engineerList.getExperience()}]]</div></td>
+					<td><div align="center">[[${engineerList.getJapanese()}]]</div></td>
+					<td><div align="center">[[${engineerList.getTechlanguage()}]]</div></td>
+					<td><div align="center">[[${engineerList.getBasicDesign()}]]</div></td>
+					<td><div align="center">[[${engineerList.getDetailDesign()}]]</div></td>
+
+					<td><div align="center">[[${engineerList.getProduce()}]]</div></td>
+					<td><div align="center">[[${engineerList.getTest()}]]</div></td>
+					<td><div align="center">[[${engineerList.getProject()}]]</div></td>
+					<td><div align="center">[[${engineerList.getLevel()}]]</div></td>
+					<td><div align="center">[[${engineerList.getNewEmployee()}]]</div></td>
+					<td><div align="center">[[${engineerList.getEngineerListComment()}]]</div></td>
+
+					<!--変更-->
+					<td>
+						<form action="/toEngineerListUpdate">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${engineerList.empCd}" />
+								<input class="btn btn-primary" type="submit" value="編集" />
+							</div>
+						</form>
+					</td>
+					<!-- <td>
+
+	<div align="center">
+	<a th:href="@{/{empCd}/engineerListUpdate(empCd=${engineerList.getEmpCd()})}"><input class="btn btn-primary" type="button" value="編集"/></a>
+	</div>
+
+	</td> -->
+					<!--削除-->
+					<td>
+						<form action="engineerList_delete">
+							<div align="center">
+								<input type="hidden" name="id"
+									th:value="${engineerList.getEmpCd()}" /> <input
+									class="btn btn-primary" type="submit" value="削除"
+									onClick="return delete_confirm()" />
+							</div>
+						</form>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div style="text-align: center; vertical-align: middel;">
+		<form action="engineerListList" method="get">
+			<p>
+				社員数：<label th:text="${countEmployee}"></label>名
+				<!-- 共<label th:text="${pageTotalNum}"></label> ページ　 -->
+				<!-- 毎ページ項目数： -->
+				<input type="hidden" name="pageSize" th:value="${pageSize}" size="3">
+				<!-- 現在ページ： -->
+				<input type="hidden" name="pageNum" th:value="${pageNum}" size="3">
+				<!-- <input type="submit" value="ToGo" class="btn btn-primary" name="buttom"> -->
+				<input type="submit" value="前へ" class="btn btn-primary"
+					name="buttom"> <input type="submit" value="次へ"
+					class="btn btn-primary" name="buttom">
+			</p>
+		</form>
+	</div>
+	<script type="text/javascript">
+	//削除確認メセージ
+	function delete_confirm(){
+		if(window.confirm('項目を削除します。よろしいですが？')){
+			//alert("確認");
+    		return true;
+		}else{
+    		//alert("キャンセル");
+    		return false;
+		}
+	}
+</script>
+
+
+	<script type="text/javascript">
+	function fileCheck(){
+		var file = document.getElementsByName('filename')[0].value;
+		if(file.length>0){
+			document.getElementById('importButton').disabled=false;
+		}else{
+			document.getElementById('importButton').disabled=true;
+		}
+		function Check(){
+			var countEmployee = document.getElementsByName('engineer')[0].value;
+			if(countEmployee==0){
+				document.getElementById('exportButton').disabled=false;
+			}else{
+				document.getElementById('exportButton').disabled=true;
+			}
+		}
+
+
+		</script>
+</body>
+
+</html>

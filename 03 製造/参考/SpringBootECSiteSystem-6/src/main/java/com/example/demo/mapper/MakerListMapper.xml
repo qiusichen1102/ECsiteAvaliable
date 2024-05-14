@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MakerListMapper">
+	<!-- getEmpInfoByEmpCd -->
+	<select id="searchMakerListList" resultType ="com.example.demo.bean.MakerList">
+      SELECT * FROM  TBL_MANUFACTURE
+       ORDER BY manufacture_id ASC
+    </select>
+
+
+	<select id="search_manufacture" resultType="com.example.demo.bean.MakerList">
+		SELECT * FROM tbl_manufacture
+		<choose>
+		  <when test="keyword != null and keyword != ''">
+			  WHERE manufacture_name LIKE '%${keyword}%' ORDER BY manufacture_id ASC
+		  </when>
+		  <otherwise>
+	          ORDER BY manufacture_id ASC
+		  </otherwise>
+		</choose>
+	</select>
+
+      <select id="getMakerListByManufacture_id" resultType ="com.example.demo.bean.MakerList">
+       SELECT manufacture_id,manufacture_name,about_manufacture,publication_status
+       FROM tbl_manufacture
+	   WHERE MANUFACTURE_ID=#{manufacture_id}
+    </select>
+
+   <delete id="MakerList_delete">
+	    DELETE FROM tbl_manufacture
+	     WHERE MANUFACTURE_ID=#{manufacture_id}
+    </delete>
+
+	<insert id="Addmaker">
+		INSERT INTO
+		 tbl_manufacture
+		(manufacture_id,manufacture_name,about_manufacture,publication_status)
+		VALUES
+		(#{manufacture_id},#{manufacture_name},#{about_manufacture},#{publication_status})
+	</insert>
+
+
+      <update id="makerList_update" parameterType="com.example.demo.bean.MakerList">
+		UPDATE  tbl_manufacture set
+		manufacture_id=#{manufacture_id},manufacture_name=#{manufacture_name},about_manufacture=#{about_manufacture},publication_status=#{publication_status}
+		WHERE manufacture_id = #{manufacture_id}
+	</update>
+
+
+
+</mapper>

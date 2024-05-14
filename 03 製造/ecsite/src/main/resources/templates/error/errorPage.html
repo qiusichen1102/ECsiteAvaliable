@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #29323c, #485563);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .error-icon {
+            font-size: 64px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animated-background {
+            animation: gradient-animation 4s ease infinite;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background-size: 400% 400%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-icon {
+            animation: pulse-animation 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="animated-background">
+    <div class="error-content">
+        <h1>おっと！何かがうまくいきませんでした。</h1>
+        <i class="error-icon">!</i>
+        <p>ご不便をおかけして申し訳ありません。</p>
+        <p>後でもう一度お試しください。</p>
+        <div>
+            <a href="/AdminLogin" class="button">管理者ページへ移動</a>
+            <a href="/index" class="button">ユーザーページへ移動</a>
+        </div>
+        <img src="./uploads/stock/error.png" alt="非常抱歉的图片">
+    </div>
+</div>
+</body>
+</html>

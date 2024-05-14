@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="xg6VyN2iuqlOhUeYnx1CTDwvtVJiptZJ2q1x6Lap">
+
+<title>お問い合わせ一覧｜ECサイト</title>
+
+<script src="./assets/admin/js/app.js"></script>
+<script src="./assets/admin/js/jquery-plugins.js"></script>
+<script src="https://kit.fontawesome.com/b0a875bb13.js"
+	crossorigin="anonymous"></script>
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+
+<link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+<div id="app" class="wrapper">
+<div th:include="./admin/header/header.html :: header"></div>
+
+		<div class="content-wrapper" style="min-height: 712.222px;">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 th:text="'お問い合わせID:'+${session.contact.your_name}"></h1>
+						</div>
+						<div class="col-sm-6">
+							<div class="content-header">
+								<div class="container-fluid">
+									<div class="row mb-2">
+										<div class="col-sm-6"></div>
+										<div class="col-sm-6">
+											<ol class="breadcrumb float-sm-right">
+												<li class="breadcrumb-item"><a href="./home"> HOME
+												</a></li>
+												<li class="breadcrumb-item"><a href="./contact_admin">
+														お問い合わせ一覧 </a></li>
+												<li class="breadcrumb-item active" th:text="${session.contact.your_name}"></li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card card-purple">
+								<div class="card-body">
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">氏名</label>
+											<div class="col-sm-12" th:text="${session.contact.your_name}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">メールアドレス</label>
+											<div class="col-sm-12" th:text="${session.contact.email}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">性別</label>
+											<div class="col-sm-12" th:text="${session.contact.gender}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">年齢</label>
+											<div class="col-sm-12" th:text="${session.contact.age}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">件名</label>
+											<div class="col-sm-12" th:text="${session.contact.title}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">お問い合わせ内容</label>
+											<div class="col-sm-12" th:text="${session.contact.contact}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">ホームページURL</label>
+											<div class="col-sm-12" th:text="${session.contact.url}">
+												なし</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="control-group">
+											<label class="col-sm-6 control-label">画像</label>
+											<div class="col-sm-12">
+												<img th:src="@{/imgDownloadContact(contactname=${session.contact.file_name})}"
+                                                            width="200px" id="stockImage">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer text-center clearfix ">
+									<form method="GET" action="./contact_edit">
+										<input type="hidden" name="_token"
+											value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4"> <input
+											type="hidden" name="your_name"
+											th:value="${session.contact.your_name}"> <input
+											type="hidden" name="email"
+											th:value="${session.contact.email}"> <input
+											type="hidden" name="gender"
+											th:value="${session.contact.gender}"> <input
+											type="hidden" name="age" th:value="${session.contact.age}">
+										<input type="hidden" name="title"
+											th:value="${session.contact.title}"> <input
+											type="hidden" name="contact"
+											th:value="${session.contact.contact}"> <input
+											type="hidden" name="url" th:value="${session.contact.url}">
+											<input
+											type="hidden" name="id" th:value="${session.contact.id}">
+										<input type="hidden" name="filename" th:src="${filename}">
+										<button type="submit" class="btn btn-info">変更する</button>
+									</form>
+									<form method="POST" th:action="'./contact_delete&'+${session.contact.id}" id="delete_1" enctype="multipart/form-data">
+										<input type="hidden" name="_token"
+											value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4"> 
+											<input
+											type="hidden" name="id" th:value="${session.contact.id}"><a
+											href="#" class="btn btn-danger js-deleteBtn" data-id="1">削除する</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div th:include="./admin/footer/footer.html :: footer"></div>
+		<div id="sidebar-overlay"></div>
+	</div>
+	<script>
+		$(function() {
+			// 削除確認用のダイアログを表示
+			$('.js-deleteBtn').click(function(e) {
+				e.preventDefault();
+				var id = $(this).data('id');
+				if (confirm('本当に削除していいですか？')) {
+					$('#delete_' + id).submit();
+				}
+			});
+		});
+	</script>
+
+
+</body>
+
+</html>

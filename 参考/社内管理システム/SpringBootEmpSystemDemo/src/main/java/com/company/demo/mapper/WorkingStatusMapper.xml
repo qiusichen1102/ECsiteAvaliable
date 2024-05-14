@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.demo.mapper.WorkingStatusMapper">
+	<!-- getEmpInfoByEmpCd -->
+	<select id="searchWorkingStatusList" resultType ="com.company.demo.bean.WorkingStatus">
+        SELECT t_workingstatus.*,t_empinfo.nameKanji,t_empinfo.sex,t_empinfo.company,t_empinfo.telNo FROM
+       t_workingstatus left join t_empinfo on t_workingstatus.empCd = t_empinfo.empCd
+    </select>
+		<select id="search_empCd" resultType ="com.company.demo.bean.WorkingStatus">
+       SELECT t_workingstatus.*,t_empinfo.nameKanji,t_empinfo.sex,t_empinfo.company,t_empinfo.telNo FROM
+       t_workingstatus left join t_empinfo on t_workingstatus.empCd = t_empinfo.empCd
+      <if test="keyword != null and keyword != ''">
+			WHERE CONCAT(t_workingstatus.empCd,t_empinfo.nameKanji) LIKE  CONCAT('%',#{keyword},'%')
+	  </if>
+    </select>
+    <update id="WorkingStatus_delete">
+	    UPDATE t_workingstatus SET
+	    projectName=NULL,projectAddress=NULL,projectStation=NULL,transportationFee=NULL,startingDay=NULL,
+		endingDay=NULL,maxWorkTime=NULL,minWorkTime=NULL,workTime=NULL,actuarial=NULL,
+		requestAmount=NULL,contractCompanyAddress=NULL,contractCompanyName=NULL,projectDepartment=NULL,
+		projecetLeader=NULL,projectTelNo=NULL,projectEmail=NULL,contractType=NULL,paymentTerm=NULL,
+		companyLeader=NULL,workingStatusComment=NULL
+	    WHERE empCd = #{empCd}
+    </update>
+	<select id="getWorkingStatusByEmpCd" parameterType="String"
+		resultType="com.company.demo.bean.WorkingStatus">
+		 SELECT t_workingstatus.*,t_empinfo.nameKanji,t_empinfo.sex,t_empinfo.company,t_empinfo.telNo FROM
+         t_workingstatus left join t_empinfo on t_workingstatus.empCd = t_empinfo.empCd
+		 WHERE t_workingstatus.empCd = #{keyword}
+	</select>
+	<update id="WorkingStatus_update" parameterType="com.company.demo.bean.WorkingStatus">
+		UPDATE t_workingstatus SET
+	    projectName=#{projectName},projectAddress=#{projectAddress},projectStation=#{projectStation},
+	    transportationFee=#{transportationFee},startingDay=#{startingDay},endingDay=#{endingDay},
+	    maxWorkTime=#{maxWorkTime},minWorkTime=#{minWorkTime},workTime=#{workTime},
+	    actuarial=#{actuarial},requestAmount=#{requestAmount},contractCompanyAddress=#{contractCompanyAddress},
+	    contractCompanyName=#{contractCompanyName},projectDepartment=#{projectDepartment},projecetLeader=#{projecetLeader},
+	    projectTelNo=#{projectTelNo},projectEmail=#{projectEmail},contractType=#{contractType},
+	    paymentTerm=#{paymentTerm},companyLeader=#{companyLeader},workingStatusComment=#{workingStatusComment}
+	    WHERE empCd = #{empCd}
+    </update>
+    <!-- 新規登録(Empinfoあり) -->
+	<insert id="add">
+		INSERT INTO
+		t_workingstatus
+		(empCd,NameKanji,Sex,Company,TelNo,projectName,projectAddress,
+		projectStation,transportationFee,startingDay,endingDay,maxWorkTime,minWorkTime,
+		workTime,actuarial,requestAmount,contractCompanyAddress,contractCompanyName,projectDepartment
+		,projecetLeader,projectTelNo,projectEmail,contractType,paymentTerm,companyLeader,workingStatusComment)
+		VALUES
+		(#{empCd},#{NameKanji},#{Sex},#{Company},#{TelNo},
+		#{projectName},#{projectAddress},#{projectStation},#{transportationFee},#{startingDay},
+		#{endingDay},#{maxWorkTime},#{minWorkTime},#{workTime},#{actuarial},
+		#{requestAmount},#{contractCompanyAddress},#{contractCompanyName},#{projectDepartment},
+		#{projecetLeader},#{projectTelNo},#{projectEmail}
+		,#{contractType},#{paymentTerm},#{companyLeader},#{workingStatusComment});
+	</insert>
+
+</mapper>

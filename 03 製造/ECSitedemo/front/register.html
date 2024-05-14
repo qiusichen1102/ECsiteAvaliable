@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="nRyEkeIjUIgIDvqrRqK4nX9ExPgBZQhnNDQZMgB0">
+
+<title>ECサイト</title>
+
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+
+<link href="./assets/front/css/app.css" rel="stylesheet">
+<style>
+.error-message {
+	text-align: left;
+	color: #d93a49;
+	font-size: 13px;
+	font-family: "Nunito", sans-serif;
+	bottom: -13px;
+	left: 5;
+}
+</style>
+</head>
+<body>
+	<div id="react-root">
+		<div>
+    <header class="header shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white headerNav"><a class="header_logo"
+                                                                                href="index.html"><img src="./assets/front/image/logo.png" alt="" class=""></a>
+            <div class="" id="navbarSupportedContent">
+            <span>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="btn btn-danger mr-3" href="login.html">ログイン</a></li>
+                    <li class="nav-item"><a class="btn btn-link text-danger" href="register.html">新規登録</a></li>
+                    <li class="nav-item"><a class="btn btn-link text-danger" href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </span>
+                <style>
+                    .menuBtn {
+                        display: none;
+                        padding: 5px;
+                        font-size: 14px;
+                        font-weight: 40;
+                        text-align: center;
+                    }
+
+                    .dropdown.show .menuBtn {
+                        display: block
+                    }
+                </style>
+                
+            </div>
+            <div class="menu-btn">
+                <figure></figure>
+                <figure></figure>
+                <figure></figure>
+            </div>
+            <div id="side-menu" class="">
+                <div class="side-menu-header">
+                    <p style="margin: 20px; font-size: 16px;"></p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="login.html">ログイン</a></li>
+                        <li><a href="register.html">新規登録</a></li>
+                        <li><a href="contact.html">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="layer-panel" class=""></div>
+        </nav>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.getElementById('logout-nav');
+            const menuBtn = document.querySelector('.menuBtn');
+
+            dropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                menuBtn.style.display = (menuBtn.style.display === 'block') ? 'none' : 'block';
+            });
+        });
+    </script>
+</div>
+		<main class="main">
+			<div class="container">
+				<div class="justify-content-center row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header">新規登録</div>
+							<div class="card-body">
+								<form method="POST" action="login.html" id="login-form" class="">
+									<input name="_token" type="hidden" class="form-control"
+										value="nRyEkeIjUIgIDvqrRqK4nX9ExPgBZQhnNDQZMgB0">
+									<div class="form-group">
+										 <span>
+											<p class="error-message" style="display: none;"></p>
+										</span>
+										<div class="row">
+											<label
+												class="col-md-4 col-form-label text-md-right form-label"
+												for="name">お名前</label>
+											<div class="col-md-6">
+												<input name="name" autocomplete="name" required=""
+													type="text" id="name" class="form-control" value=""><span
+													class="invalid-feedback" role="alert"><strong></strong></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<label
+												class="col-md-4 col-form-label text-md-right form-label"
+												for="email">メールアドレス</label>
+											<div class="col-md-6">
+												<input name="email" autocomplete="email" required=""
+													type="email" id="email" class="form-control" value=""><span
+													class="invalid-feedback" role="alert"><strong></strong></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<label
+												class="col-md-4 col-form-label text-md-right form-label"
+												for="password">パスワード</label>
+											<div class="col-md-6">
+												<input name="password" autocomplete="new-password" required
+													type="password" id="password" class="form-control">
+												<span class="invalid-feedback" role="alert"><strong></strong></span>
+												<span class="error-message" style="display: none;"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<label
+												class="col-md-4 col-form-label text-md-right form-label"
+												for="password-confirm">パスワード（確認）</label>
+											<div class="col-md-6">
+												<input name="password_confirmation"
+													autocomplete="new-password" required type="password"
+													id="password-confirm" class="form-control"> 
+													<span class="invalid-feedback" role="alert"><strong></strong></span>
+												<span id="password-confirm-error" class="error-message"
+													style="display: none;"></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group mb-0 row">
+										<div class="offset-md-4 col-md-6">
+											<button type="submit" class="btn btn-primary">新規登録</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<div>
+<footer class="footer">
+    <div class="footer_inner">
+        <p class="mt20"><img src="./assets/front/image/logo.png" alt=""></p>
+        <p class="mt10"><small class="fz-s">©️hti このページは架空のページです。実際の人物・団体とは関係ありません。</small></p>
+    </div>
+</footer>
+</div>
+	</div>
+	<script>
+		function validatePassword() {
+			var passwordInput = document.getElementById("password");
+			var confirmPasswordInput = document
+					.getElementById("password-confirm");
+			var confirmPasswordError = document
+					.getElementById("password-confirm-error");
+
+			if (passwordInput.value.length < 6
+					|| !/^[a-zA-Z0-9]+$/.test(passwordInput.value)) {
+				passwordInput.setCustomValidity("パスワードは6桁以上の英数字");
+				passwordInput.classList.add("is-invalid");
+				passwordInput.nextElementSibling.textContent = "パスワードは6桁以上の英数字";
+				passwordInput.nextElementSibling.style.display = "block";
+				confirmPasswordError.style.display = "none";
+			} else {
+				passwordInput.setCustomValidity("");
+				passwordInput.classList.remove("is-invalid");
+				passwordInput.nextElementSibling.textContent = "";
+				passwordInput.nextElementSibling.style.display = "none";
+				confirmPasswordError.style.display = "none";
+			}
+
+			if (confirmPasswordInput.value !== passwordInput.value) {
+				confirmPasswordInput.setCustomValidity("パスワードが一致しません");
+				confirmPasswordInput.classList.add("is-invalid");
+				confirmPasswordError.textContent = "パスワードが一致しません";
+				confirmPasswordError.style.display = "block";
+			} else {
+				confirmPasswordInput.setCustomValidity("");
+				confirmPasswordInput.classList.remove("is-invalid");
+				confirmPasswordError.textContent = "";
+				confirmPasswordError.style.display = "none";
+			}
+		}
+
+		var passwordInput = document.getElementById("password");
+		var confirmPasswordInput = document.getElementById("password-confirm");
+
+		passwordInput.addEventListener("input", validatePassword);
+		confirmPasswordInput.addEventListener("input", validatePassword);
+	</script>
+
+	<script>
+		var laravelSession = {};
+		laravelSession['status'] = '';
+		laravelSession['resent'] = '';
+		var laravelErrors = [];
+	</script>
+	<script src="https://laraec.isystk.com/assets/front/js/app.js" defer=""></script>
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+	<script
+		src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+
+
+	<iframe name="__privateStripeMetricsController3390" frameborder="0"
+		allowtransparency="true" scrolling="no" role="presentation"
+		allow="payment *"
+		src="https://js.stripe.com/v3/m-outer-93afeeb17bc37e711759584dbfc50d47.html#url=https%3A%2F%2Flaraec.isystk.com%2F&amp;title=LaraEC&amp;referrer=&amp;muid=b180e683-7123-4569-81c5-78422f08302fa34d58&amp;sid=8444d4ea-5190-47b7-9546-ab47a1dded86d0232a&amp;version=6&amp;preview=false"
+		aria-hidden="true" tabindex="-1"
+		style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+</body>

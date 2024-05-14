@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="xg6VyN2iuqlOhUeYnx1CTDwvtVJiptZJ2q1x6Lap">
+
+<title>画像一覧｜LaraEC</title>
+
+<script src="./assets/admin/js/app.js"></script>
+<script src="./assets/admin/js/jquery-plugins.js"></script>
+<script src="https://kit.fontawesome.com/b0a875bb13.js"
+	crossorigin="anonymous"></script>
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+
+<link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini">
+	<div id="app" class="wrapper">
+		<div th:include="./admin/header/header.html :: header"></div>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>画像一覧</h1>
+						</div>
+						<div class="col-sm-6">
+							<div class="content-header">
+								<div class="container-fluid">
+									<div class="row mb-2">
+										<div class="col-sm-6"></div>
+										<div class="col-sm-6">
+											<ol class="breadcrumb float-sm-right">
+												<li class="breadcrumb-item"><a href="./home"> HOME
+												</a></li>
+												<li class="breadcrumb-item active">画像一覧</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card card-purple">
+								<div class="card-header">
+									<h3 class="card-title">検索条件</h3>
+								</div>
+								<form action="./photo" method="GET">
+									<div class="card-body">
+										<div class="form-group">
+											<div class="control-group" id="photoName">
+												<label class="col-sm-2 control-label">ファイル名</label>
+												<div class="col-sm-4">
+													<input type="text" name="name" class="form-control"
+														size="10" maxlength="100" value="">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center">
+										<button type="submit" class="btn btn-secondary">検索</button>
+									</div>
+								</form>
+							</div>
+							<form action="./photo" method="GET" id="pagingForm">
+								<input type="hidden" name="name" value="">
+							</form>
+							<div class="row">
+								<div class="col-12">
+									<div class="card card-purple">
+										<div class="card-header">
+											<h3 class="card-title">検索結果</h3>
+										</div>
+										<div class="card-body table-responsive p-0">
+											<table class="table table-hover text-nowrap">
+												<thead>
+													<tr>
+														<th>種別</th>
+														<th>ファイル名</th>
+														<th>画像</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="photo : ${photo}">
+														<td th:text="${photo.name}">商品</td>
+														<td th:text="${photo.filename}">earth.jpg</td>
+														<td><img
+															th:src="@{/imgDownloadPhoto(photoId=${photo.id})}"
+															alt="" width="100px"></td>
+														<td>
+
+															<form method="POST" th:action="'./photo_delete&'+${photo.id}" id="delete_1">
+																<input type="hidden" name="_token"
+																	   value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4"><a th:href="'./photo_delete&'+${photo.id}" class="btn btn-danger js-deleteBtn">削除する</a>
+															</form>
+
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="card-footer clearfix "></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:include="./admin/footer/footer.html :: footer"></div>
+	</div>
+
+	<script>
+
+	/*	$(function () {
+			// 削除確認用のダイアログを表示
+			$('.js-deleteBtn').click(function (e) {
+				e.preventDefault();
+				var id = $(this).data('id');
+				if (confirm('本当に削除していいですか？')) {
+					$('#delete_' + id).submit();
+				}
+			});
+		});*/
+	// 获取删除按钮元素
+	var deleteBtn = document.querySelector('.js-deleteBtn');
+
+	// 绑定点击事件
+	deleteBtn.addEventListener('click', function(event) {
+		// 阻止默认的链接点击行为
+		event.preventDefault();
+
+		// 弹出确认对话框
+		var confirmDelete = confirm("确定要删除吗？");
+
+		// 如果用户确认删除，则提交表单
+		if (confirmDelete) {
+			// 获取表单元素
+			var form = document.getElementById('delete_1');
+			// 提交表单
+			form.submit();
+		}
+	});
+	</script>
+</body>
+
+</html>

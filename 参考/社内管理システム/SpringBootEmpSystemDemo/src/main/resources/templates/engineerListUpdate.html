@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>営業対象変更画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>営業対象変更画面</h3>
+    </div>
+<form action="/engineerListUpdate" method="post">
+<div align="center">
+<table class="table table-striped">
+
+<tr>
+	<td>社員番号：</td>
+	<td><input class="form-control" type="text" name="empCd" id="empCd"  th:field="${engineerListUpdate.empCd}"/> </td>
+	
+	<td>姓名：</td>
+	<td><input class="form-control" type="text" name="nameKanji" th:field="${engineerListUpdate.nameKanji}" /></td>
+
+</tr>
+<tr>
+	<td>性別：</td>
+	<td><input class="form-control" type="text" name="sex" th:field="${engineerListUpdate.sex}" /></td>
+	
+	<td>最寄駅：</td>
+	<td><input class="form-control" type="text" name="homeStation" th:field="${engineerListUpdate.homeStation}" /></td>
+</tr>
+
+<tr>
+	<td>稼働開始日：</td>
+	<td><input class="form-control" type="date" name="workingDate" th:value="${#dates.format(engineerListUpdate.workingDate, 'yyyy-MM-dd')}" /></td>
+	
+	<td>実務年数：</td>
+	<td><input class="form-control" type="text" name="experience" th:field="${engineerListUpdate.experience}" /></td>
+</tr>
+
+<tr>
+	<td>日本語：</td>
+	<td><input class="form-control" type="text" name="japanese" th:field="${engineerListUpdate.japanese}" /></td>
+	
+	<td>メイン言語：</td>
+	<td><input class="form-control" type="text" name="techlanguage" th:field="${engineerListUpdate.techlanguage}" /></td>
+</tr>
+
+<tr>
+	<td>基本設計：</td>
+	<td><input class="form-control" type="text" name="basicDesign" th:field="${engineerListUpdate.basicDesign}" /></td>
+
+	<td>詳細設計：</td>
+	<td><input class="form-control" type="text" name="detailDesign" th:field="${engineerListUpdate.detailDesign}" /></td>
+</tr>
+
+<tr>
+	<td>製造：</td>
+	<td><input class="form-control" type="text" name="produce" th:field="${engineerListUpdate.produce}" /></td>
+	<td>テスト：</td>
+	<td><input class="form-control" type="text" name="test" th:field="${engineerListUpdate.test}" /></td>
+</tr>
+
+<tr>
+	<td>現在現場：</td>
+	<td><input class="form-control" type="text" name="project" th:field="${engineerListUpdate.project}" /></td>
+	<td>レベル：</td>
+	<td><input class="form-control" type="text" name="level" th:field="${engineerListUpdate.level}" /></td>
+</tr>
+
+
+<tr>
+	<td>新人：</td>
+	<td><input class="form-control" type="text" name="newEmployee" th:field="${engineerListUpdate.newEmployee}" /></td>
+</tr>
+
+<tr>
+	<td>備考：</td>
+	<td><textarea class="form-control" style="height: 100px; width: 75%;"
+							name="engineerListComment" th:field="${engineerListUpdate.engineerListComment}"/></textarea></td>
+</tr>
+
+<tr>
+	<td colspan="4" align="center">
+    <input class="btn btn-success" type="submit" value="確定"/>
+    <input class="btn btn-success" type="button"value="戻る" onClick="window.location.href='./engineerListList'"></td>
+	
+</tr>
+
+</table>
+<input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+</div>
+</form>
+</div>
+</body>
+</html>

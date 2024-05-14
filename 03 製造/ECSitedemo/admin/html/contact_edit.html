@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="xg6VyN2iuqlOhUeYnx1CTDwvtVJiptZJ2q1x6Lap">
+
+    <title>お問い合わせ一覧｜ECサイト</title>
+
+    <script src="./assets/admin/js/app.js"></script>
+    <script src="./assets/admin/js/jquery-plugins.js"></script>
+    <script src="https://kit.fontawesome.com/b0a875bb13.js" crossorigin="anonymous"></script>
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+    <div id="app" class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <div class="dropdown ml-auto">
+                <button type="button" id="dropdown1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    管理者A
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown1">
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                        ログアウト
+                    </a>
+                    <form id="logout-form" action="./logout" method="POST"
+                        style="display: none;">
+                        <input type="hidden" name="_token" value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4">
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <aside class="main-sidebar sidebar-dark-purple elevation-4">
+            <a href="." class="brand-link">
+                <img src="./assets/admin/image/AdminLTELogo.png" alt="AdminSample Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">LaraEC</span>
+            </a>
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item has-treeview  - ">
+                            <a href="#" class="nav-link  - ">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    商品管理
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style=" - ">
+                                <li class="nav-item">
+                                    <a href="./stock.html" class="nav-link  - ">
+                                        <i class="fas fa-box-open nav-icon"></i>
+                                        <p>在庫管理</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./order.html" class="nav-link  - ">
+                                        <i class="fas fa-cart-arrow-down nav-icon"></i>
+                                        <p>注文履歴</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview menu-open - ">
+                            <a href="#" class="nav-link active - ">
+                                <i class="far fa-frown"></i>
+                                <p>
+                                    ユーザ管理
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display:block; - ">
+                                <li class="nav-item">
+                                    <a href="./user.html" class="nav-link  - ">
+                                        <i class="fa fa-layer-group nav-icon"></i>
+                                        <p>顧客管理</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./contact.html" class="nav-link active - ">
+                                        <i class="far fa-comment nav-icon"></i>
+                                        <p>お問い合わせ</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview  - ">
+                            <a href="#" class="nav-link  - ">
+                                <i class="fa fa-cogs"></i>
+                                <p>
+                                    システム管理
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style=" - ">
+                                <li class="nav-item">
+                                    <a href="./photo.html" class="nav-link  - ">
+                                        <i class="fa fa-file-image nav-icon"></i>
+                                        <p>画像管理</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="content-wrapper" style="min-height: 712.222px;">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>注文ID:1の変更</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-right">
+                                                <li class="breadcrumb-item">
+                                                    <a href="./home.html">
+                                                        HOME
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="./contact.html">
+                                                        お問い合わせ一覧
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="./contact_detail.html">
+                                                        お問い合わせID:1
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item active">
+                                                    お問い合わせID:1の変更
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="card card-purple">
+                                <div class="card-body">
+
+                                    <form method="POST" enctype="multipart/form-data"
+                                        action="./contact.html">
+                                        <input type="hidden" name="_token"
+                                            value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4">
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">氏名</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" name="your_name" value="大垣 治"
+                                                        placeholder="サンプル太郎" maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">メールアドレス</label>
+                                                <div class="col-sm-12">
+                                                    <input type="email" name="email" value="kijima.chiyo@kato.com"
+                                                        placeholder="sample@sample.com" maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">性別</label>
+                                                <div class="col-sm-12">
+                                                    <label>
+                                                        <input type="radio" name="gender" value="0"
+                                                            checked="&quot;checked&quot;">
+                                                        <span>男性</span>
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="gender" value="1">
+                                                        <span>女性</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">年齢</label>
+                                                <div class="col-sm-12">
+                                                    <select name="age">
+                                                        <option value="">選択してください</option>
+                                                        <option value="1">～19歳</option>
+                                                        <option value="2" selected="&quot;selected&quot;">20歳～29歳
+                                                        </option>
+                                                        <option value="3">30歳～39歳</option>
+                                                        <option value="4">40歳～49歳</option>
+                                                        <option value="5">50歳～59歳</option>
+                                                        <option value="6">60歳～</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">件名</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" name="title"
+                                                        value="つに、ぬれたのです」泣ないようにしてくだされているけれどからなけぁいけないっているんだんだわ」「い。"
+                                                        placeholder="○○について" maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">お問い合わせ内容</label>
+                                                <div class="col-sm-12">
+                                                    <textarea name="contact" rows="8"
+                                                        cols="80">ふき、鳥がたくないんだからそう考えだした。するとちゅうに言いっしょうかぼんやりかえっておじぎを腰こしらと南からか敷物しきしました。ジョバンニもカムパネルラのおのようなものでわずかにおこしからのはじめてできるのです」「標本ひょうめんの輪転機りんごのお祭まつや楢ならんとしてうしを下流かりましたくさんがするときだ。いつかし雁がんだ。こうへいせんろにかく皺しわかにわかにその笑わらにわかり持もってかがやけ。</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">ホームページURL</label>
+                                                <div class="col-sm-12">
+                                                    <input type="url" name="url"
+                                                        value="https://www.sakamoto.net/magni-temporibus-exercitationem-provident-adipisci-est-est-ut"
+                                                        placeholder="https://sample.com" maxlength="100">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="control-group" id="userName">
+                                                <label class="col-sm-6 control-label">画像</label>
+                                                <div class="col-sm-12">
+
+                                                    <p><input id="js-uploadImage" type="file">
+                                                    </p>
+                                                    <div id="result">
+                                                        <img src="./uploads/1615273024sample.jpg"
+                                                            width="200px" id="contactFormImage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-center clearfix ">
+                                            <input class="btn btn-info" type="submit" value="登録する">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <strong>Copyright © 2023-2028 <a href="#">hti.com</a>.</strong> All rights reserved.
+            </footer>
+        </div>
+        <script>
+            $(function () {
+                // 画像ファイルアップロード
+                $('#js-uploadImage').imageUploader({
+                    dropAreaSelector: '#drop-zone',
+                    successCallback: function (res) {
+
+                        $('#result').empty();
+                        $('#result').append('<img src="' + res.fileData + '" width="200px" />');
+                        $('#result').append('<input type="hidden" name="imageBase64" value="' + res.fileData + '" />');
+                        $('#result').append('<input type="hidden" name="fileName" value="' + res.fileName + '" />');
+
+                        $('.error-message').empty();
+                    },
+                    errorCallback: function (res) {
+                        $('.error-message').text(res[0]);
+                    }
+                });
+            });
+        </script>
+
+
+        <div id="sidebar-overlay"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja" style="height: auto;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="xg6VyN2iuqlOhUeYnx1CTDwvtVJiptZJ2q1x6Lap">
+
+    <title>顧客一覧｜ECサイト</title>
+
+    <script src="./assets/admin/js/app.js"></script>
+    <script src="./assets/admin/js/jquery-plugins.js"></script>
+    <script src="https://kit.fontawesome.com/b0a875bb13.js" crossorigin="anonymous"></script>
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+    <div id="app" class="wrapper">
+        <div th:include="./admin/header/header.html :: header"></div>
+
+        <div class="content-wrapper" style="min-height: 712.222px;">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 th:text="${session.user.name}">テスト1</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-right">
+                                                <li class="breadcrumb-item">
+                                                    <a href="./home">
+                                                        HOME
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="./user">
+                                                        顧客一覧
+                                                    </a>
+                                                </li>
+                                                <li class="breadcrumb-item active" th:text="${session.user.name}">
+                                                    
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="card card-purple">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">氏名</label>
+                                            <div class="col-sm-4" th:text="${session.user.name}">
+                                                なし
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="control-group">
+                                            <label class="col-sm-2 control-label">メールアドレス</label>
+                                            <div class="col-sm-4" th:text="${session.user.email}">
+                                                なし
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center clearfix ">
+                                    <form method="GET" action="./user_edit">
+                                        <input type="hidden" name="_token"
+                                            value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4"> 
+                                            <input
+											type="hidden" name="name"
+											th:value="${session.user.name}"> <input
+											type="hidden" name="email"
+											th:value="${session.user.email}"> 
+											<input
+											type="hidden" name="id"
+											th:value="${session.user.id}"> 
+                                            <input
+                                            class="btn btn-info" type="submit" value="変更する">
+                                    </form>
+                                    <form method="POST" action="./user" id="delete_1">
+                                        <input type="hidden" name="_token"
+                                            value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO5">
+                                            <input
+											type="hidden" name="id" th:value="${session.user.id}"> <a href="#"
+                                            class="btn btn-danger js-deleteBtn" data-id="1">削除する</a>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="main-footer">
+            <strong>Copyright © 2019-2020 <a href="#">isystk.com</a>.</strong> All rights reserved.
+        </footer>
+        <div id="sidebar-overlay"></div>
+    </div>
+    <script>
+        $(function () {
+            // 削除確認用のダイアログを表示
+            $('.js-deleteBtn').click(function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                if (confirm('本当に削除していいですか？')) {
+                    $('#delete_' + id).submit();
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

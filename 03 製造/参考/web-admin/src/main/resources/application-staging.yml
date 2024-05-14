@@ -1,0 +1,10 @@
+spring:
+  profiles: staging
+
+server:
+  address: stg.aws.isystk.com
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: /var/www/html/thumb

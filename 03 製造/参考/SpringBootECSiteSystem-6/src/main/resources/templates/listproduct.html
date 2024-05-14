@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>商品情報一覧</title>
+
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="bg-primary" align="center">
+			<h3>商品情報一覧画面</h3>
+		</div>
+		<!-- 機能 -->
+
+		<div class="row" style="margin-top: 110px">
+
+			<div>
+					<input class="btn btn-primary" type="submit" value="戻る" onClick="window.location.href='./meun'">
+			</div>
+
+			<div align="right">
+				<form action="/toinsertproduct">
+					<input class="btn btn-success" style="margin-right: 20px"
+						type="submit" value="新規商品登録">
+				</form>
+			</div>
+		</div>
+
+		<div id="div" style="margin-left: 10px">
+			<form action="searchproduct" method="get">
+				<div class="form-group" style="margin-top: 30px">
+					<div class="form-search">
+
+						<div class="form-search">
+							<input type="text" class="form-search" name="keyword"
+								id="txtname" placeholder="商品名" th:value="${keyword}"><input
+								class="btn btn-primary" type="submit" value="検索">
+						</div>
+
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+	</div>
+
+
+
+
+
+	<!-- 社員リスト -->
+	<div align="center" class="table-responsive">
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+
+
+					<th><div align="center">商品番号</div></th>
+					<th><div align="center">商品名</div></th>
+					<th><div align="center">商品コード</div></th>
+					<th><div align="center">カテゴリID</div></th>
+					<th><div align="center">メーカーID</div></th>
+					<th><div align="center">商品単価</div></th>
+					<th><div align="center">在庫数目</div></th>
+					<th><div align="center">商品詳細</div></th>
+					<th><div align="center">商品イメージ</div></th>
+					<th><div align="center">表示状態</div></th>
+
+
+					<th colspan="2"><div align="center">操作</div></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="product:${productList1}" th:var="emp" bgcolor="white"
+					class="y">
+					<td>
+						<form action="/detailsproduct" >
+							<div align="center">
+								<input class="btn btn-primary" name="id" type="submit"
+									th:value="${product.getProduct_id()}" />
+							</div>
+						</form>
+					</td>
+				
+					<td><div align="center">[[${product.getProduct_name()}]]</div></td>
+					<td><div align="center">[[${product.getProduct_code()}]]</div></td>
+					<td><div align="center">[[${product.getCategory_id()}]]</div></td>
+					<td><div align="center">[[${product.getManufacture_id()}]]</div></td>
+					<td><div align="center">[[${product.getProduct_price()}]]</div></td>
+					<td><div align="center">[[${product.getProduct_quantity()}]]</div></td>
+					<td><div align="center">[[${product.getProduct_description()}]]</div></td>
+	                <td ><img th:src="${product.product_imagefile}" style="width: 50px; height: 50px"></td>
+<!-- 					<td ><img src="/img/1000012.jpg" style="width: 50px; height: 50px"></td>
+ --> 	
+					<td><div align="center">[[${product.getPublication_status()}]]</div></td>
+
+
+					<td>
+						<form action="/toProductUpdate">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${product.product_id}" />
+								<input class="btn btn-primary" type="submit" value="編集" />
+							</div>
+						</form> <!-- 		<form action="toupdateproduct" method="get">
+				<div class="form-group" style="margin-top: 30px">
+
+
+						 <div class="form-search">
+							<input class="btn btn-primary" name="id"
+								id="txtname"  th:value="${keyword}">
+								<input
+								class="btn btn-primary" type="submit" th:value="${keyword}" value="編集" name="id">
+						</div>
+
+					</div>
+
+			</form> -->
+
+
+					</td>
+					<td>
+						<form action="deleteproduct">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${product.product_id}" />
+								<input class="btn btn-primary" type="submit" value="削除"
+									onClick="delete_confirm()" />
+							</div>
+						</form>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: center; vertical-align: middel;">
+		<form action="/product" method="get">
+			<p>
+				商品数：<label th:text="${countProduct}"></label>個 共<label
+					th:text="${pageTotalNum}"></label>ページ 毎ページ項目数： <input
+					name="pageSize" th:value="${pageSize}" size="3"> 現在ページ： <input
+					name="pageNum" th:value="${pageNum}" size="3"> <input
+					type="submit" value="ToGo" class="btn btn-primary" name="buttom">
+				<input type="submit" value="前へ" class="btn btn-primary"
+					name="buttom"> <input class="btn btn-primary" type="submit"
+					value="次へ" name="buttom">
+
+
+			</p>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		//deteleメセージ
+		function delete_confirm() {
+			if (window.confirm('商品を削除します。よろしいですが？')) {
+				//alert("確認");
+				return true;
+			} else {
+				//alert("キャンセル");
+				return false;
+			}
+		}
+	</script>
+
+</body>
+</html>

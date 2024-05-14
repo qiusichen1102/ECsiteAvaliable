@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja" style="height: auto;">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token"
+	content="xg6VyN2iuqlOhUeYnx1CTDwvtVJiptZJ2q1x6Lap">
+
+<title>顧客一覧｜ECサイト</title>
+
+<script src="./assets/admin/js/app.js"></script>
+<script src="./assets/admin/js/jquery-plugins.js"></script>
+<script src="https://kit.fontawesome.com/b0a875bb13.js"
+	crossorigin="anonymous"></script>
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito"
+	rel="stylesheet">
+
+<link href="./assets/admin/css/app.css" rel="stylesheet">
+</head>
+
+<body class="sidebar-mini" style="height: auto;">
+	<div id="app" class="wrapper">
+		<div th:include="./admin/header/header.html :: header"></div>
+
+		<div class="content-wrapper" style="min-height: 712.222px;">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1  th:text="${user.name} + の変更"></h1>
+						</div>
+						<div class="col-sm-6">
+							<div class="content-header">
+								<div class="container-fluid">
+									<div class="row mb-2">
+										<div class="col-sm-6"></div>
+										<div class="col-sm-6">
+											<ol class="breadcrumb float-sm-right">
+												<li class="breadcrumb-item"><a href="./home"> HOME
+												</a></li>
+												<li class="breadcrumb-item"><a href="./user"> 顧客一覧
+												</a></li>
+												<li class="breadcrumb-item" >
+												 <a th:href="@{'/user_detail&'+${user.id}}" th:text="${user.name}">  
+                                                 </a></li>
+												<li class="breadcrumb-item active" th:text="${user.name} + の変更" ></li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+
+
+							<form method="POST" enctype="multipart/form-data" action="./user">
+								<input type="hidden" name="_token"
+									value="XV7tF73lP1V31unyV3Oxkj2siVujlZtLdM6snqO4">
+								<div class="card card-purple">
+									<div class="card-body">
+										氏名 <input type="text" name="name" th:value="${user.name}">
+										<br> メールアドレス <input type="email" name="email"
+											th:value="${user.email}">
+									</div>
+									<div class="card-footer text-center clearfix ">
+										<input class="btn btn-info" type="submit" value="登録する">
+									</div>
+									<div class="control-group" id="userName">
+										<p>
+											<input type="hidden" name="id" th:value="${user.id}">
+										</p>
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		   <div th:include="./admin/footer/footer.html :: footer"></div>
+		<div id="sidebar-overlay"></div>
+	</div>
+
+
+</body>
+
+</html>

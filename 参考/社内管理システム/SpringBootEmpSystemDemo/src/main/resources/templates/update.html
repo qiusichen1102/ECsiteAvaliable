@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>社員変更画面</title>
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+<div class="bg-primary" align="center">
+        <h3>社員変更画面</h3>
+    </div>
+<form action="/update" method="post">
+<div align="center">
+<table class="table table-striped">
+<tr>
+	<td>社員番号：</td>
+	<td>
+	<input class="form-control" type="text" name="empCd" id="empCd"  th:field="${empInfo.empCd}"/> </td>
+
+	<td>個人メールアドレス：</td>
+	<td><input class="form-control" type="text" name="email" th:field="${empInfo.email}" /></td>
+
+</tr>
+<tr>
+	<td>姓名（漢字）：</td>
+	<td><input class="form-control" type="text" name="nameKanji" th:field="${empInfo.nameKanji}" /></td>
+
+	<td>姓名（カナ）：</td>
+	<td><input class="form-control" type="text" name="nameKana" th:field="${empInfo.nameKana}" /></td>
+</tr>
+
+<tr>
+	<td>性別：</td>
+	<td><input class="form-control" type="text" name="sex" th:field="${empInfo.sex}" /></td>
+
+	<td>国籍：</td>
+	<td><input class="form-control" type="text" name="country" th:field="${empInfo.country}" /></td>
+</tr>
+
+<tr>
+	<td>生年月日：</td>
+	<td><input class="form-control" type="date" name="birthday" th:value="${#dates.format(empInfo.birthday, 'yyyy-MM-dd')}" /></td>
+
+	<td>郵便番号：</td>
+	<td><input class="form-control" type="text" name="postcode" th:field="${empInfo.postcode}" /></td>
+</tr>
+
+<tr>
+	<td>会社メールアドレス：</td>
+	<td><input class="form-control" type="text" name="companyEmail" th:field="${empInfo.companyEmail}" /></td>
+
+	<td>電話番号（「‐」抜き）：</td>
+	<td><input class="form-control" type="text" name="telNo" th:field="${empInfo.telNo}" /></td>
+</tr>
+
+<tr>
+	<td rowspan="2">住所：</td>
+	<td ><textarea class="form-control" style="height: 100px; width: 75%;"
+							name="address" th:field="${empInfo.address}"/></textarea></td>
+	<td>最寄駅：</td>
+	<td><input class="form-control" type="text" name="homeStation" th:field="${empInfo.homeStation}" /></td>
+
+</tr>
+<tr>
+</tr>
+<tr>
+	<td>入社日付：</td>
+	<td><input class="form-control" type="date" name="enteringDate" th:value="${#dates.format(empInfo.enteringDate, 'yyyy-MM-dd')}" /></td>
+	<td>退職日付：</td>
+	<td><input class="form-control" type="date" name="dimissionDate"  th:value="${#dates.format(empInfo.dimissionDate, 'yyyy-MM-dd')}"/></td>
+</tr>
+
+<tr>
+	<td>所属会社：</td>
+	<td><input class="form-control" type="text" name="company" th:field="${empInfo.company}" /></td>
+	<td>社員区分：</td>
+	<td><input class="form-control" type="text" name="employeeType" th:field="${empInfo.employeeType}" /></td>
+
+</tr>
+
+<tr>
+	<td>備考：</td>
+	<td colspan="4"><textarea class="form-control" style="height: 100px; width: 75%;"
+							name="comment" th:field="${empInfo.comment}"/></textarea><br></td>
+	<td></td>
+</tr>
+
+<tr>
+	<td colspan="4" align="center">
+    <input class="btn btn-success" type="submit" value="確定"/>
+    <input class="btn btn-success" type="button"value="戻る" onClick="window.location.href='./list'"></td>
+
+</tr>
+
+</table>
+<!-- 解决update权限不足问题 -->
+ <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+</div>
+</form>
+</div>
+</body>
+</html>

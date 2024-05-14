@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>メーカー情報一覧</title>
+
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="bg-primary" align="center">
+		<h3>メーカー情報一覧画面</h3>
+	</div>
+	<!-- 機能 -->
+
+	<div class="row"  style="margin-top: 110px">
+	<div >
+<input class="btn btn-primary" type="submit" value="戻る" onClick="window.location.href='./meun'">
+	</div>
+	<div  align="right">
+	<form action="/add">
+	<input class="btn btn-success" style="margin-right: 20px" type="submit" value="新規メーカー登録">
+    </form>
+	</div>
+	</div>
+
+	<div id="div" style="margin-left: 10px">
+		<form action="makerList_search" method="get">
+			<div class="form-group" style="margin-top: 30px">
+				<div class="form-search">
+
+      <div class="form-search">
+					<input type="text" class="form-search" name="keyword" id="txtname" placeholder="メーカー名"
+						th:value="${keyword}"><input class="btn btn-primary"  type="submit" value="検索">
+				</div>
+
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 社員リスト -->
+	<div align="center" class="table-responsive">
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th><div align="center">メーカーID</div></th>
+					<th><div align="center">メーカー名</div></th>
+					<th><div align="center">メーカー詳細</div></th>
+                    <th><div align="center">表示状態</div></th>
+					<th colspan="2"><div align="center">操作</div></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="maker:${engineerListList}" th:var="emp" bgcolor="white" class="y"
+					>
+					<td>
+					<form action="toMakerListDetails">
+							<div align="center">
+						<input class="btn btn-primary" type="submit" name="id" th:value="${maker.manufacture_id}" >
+							</div>
+					</form>
+					</td>
+					<td><div align="center">[[${maker.getManufacture_name()}]]</div></td>
+					<td><div align="center">[[${maker.getAbout_manufacture()}]]</div></td>
+					<td><div align="center">[[${maker.getPublication_status()}]]</div></td>
+
+					<td>
+						<form action="/toMakerUpdate">
+							<div align="center">
+							<input type="hidden" name="id" th:value="${maker.manufacture_id}" >
+								<input class="btn btn-primary"  type="submit" value="編集">
+
+							</div>
+						</form>
+					</td>
+					<td>
+						<form action="makerList_delete">
+							<div align="center">
+								<input type="hidden" name="id" th:value="${maker.manufacture_id}" /> <input
+									class="btn btn-primary" type="submit" value="削除" onClick="delete_confirm()" />
+							</div>
+						</form>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		
+		<input type="button" value="ダウンロード（Excel）"
+					onclick="window.location.href='/makerListExcel' "> 
+		
+	</div>
+
+<div style="text-align:center; vertical-align:middel;">
+		<form action="MakerList" method="get">
+			<p>
+				メーカー数：<label th:text="${countMakerlist}"></label>個
+				共<label th:text="${pageTotalNum}"></label> ページ
+				毎ページ項目数:
+				<input name="pageSize" th:value="${pageSize}" size="3" >
+				現在ページ：
+				<input name="pageNum" th:value="${pageNum}" size="3">
+					 <input type="submit" value="ToGo" class="btn btn-primary" name="buttom">
+					<input type="submit" value="前へ" class="btn btn-primary" name="buttom" >
+            		<input class="btn btn-primary" type="submit" value="次へ" name="buttom" >
+
+			</p>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		//deteleメセージ
+		function delete_confirm() {
+			if (window.confirm('商品を削除します。よろしいですが？')) {
+				//alert("確認");
+				return true;
+			} else {
+				//alert("キャンセル");
+				return false;
+			}
+		}
+	</script>
+</div>
+</body>
+</html>

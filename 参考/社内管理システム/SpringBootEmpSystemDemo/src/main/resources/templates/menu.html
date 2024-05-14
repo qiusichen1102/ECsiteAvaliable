@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--user-scalable=yes -->
+<meta name="renderer" content="webkit|ie-Comp|ie-stand">
+<!-- いろいろIEブラウザの応対 -->
+<meta name="description" content="ソフトユージング社員システム">
+<!-- このページの内容 -->
+<meta name="keywords" content="ソフトユージング,IT">
+<!-- 検索する時のキーワード -->
+
+<!-- localCss-->
+<link rel="stylesheet" type="text/css" href="../css/menu.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+
+<title>社員情報システム</title>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<img src="css/img/logo2.png" width="75" height="55" id="logo2"><br>
+		<p>SOFTUSING</p>
+		<h3 class="text-dark">社員情報システム</h3>
+		<h4 class="text-dark">メニュー欄</h4>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	<h4 align="center"><a th:href="@{/login}">ログインしてください</a></h4>
+</div>
+
+<div sec:authorize="isAuthenticated()" align="right">
+	<h5 ><span sec:authentication="name"></span>,ようこそ
+	<!-- <span sec:authentication="principal.authorities"></span> -->
+	</h5>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="ログアウト"/>
+	</form>
+</div>
+	
+	<div class="container-fluid">
+		<div class="row"  align="center">
+			<div class="col-sm-4" sec:authorize="hasAnyRole('1','0')">
+				<h3 class="text-dark">社員個人基本情報</h3>
+				<p>個人情報の調べ、確認ことができます。</p>
+				<a href="#"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+			<div class="col-sm-4" sec:authorize="hasAnyRole('1','0')">
+				<h3 class="text-dark">社員基本情報一覧</h3>
+				<p>全員の情報を確認ことができます。</p>
+				<a href="list"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+			<div class="col-sm-4" sec:authorize="hasAnyRole('1','0')">
+				<h3 class="text-dark">人事基本情報表</h3>
+				<p>
+					人事情報を確認ことができます。
+				</p>
+				<a href="humanResourceList"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="row" align="center">
+			<div class="col-sm-4 space" sec:authorize="hasAnyRole('1','0')">
+				<h3 class="text-dark">年金一覧</h3>
+				<p>
+					国民年金、厚生年金、健康保険
+				</p>
+				<a href="retailList"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+
+			<div class="col-sm-4" sec:authorize="hasAnyRole('1','0')">
+				<h3 class="text-dark">雇用保険一覧</h3>
+				<p>雇用保険</p>
+				<a href="workInsuranceList"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+
+		</div>
+		<br>
+		<br>
+
+		<div class="row" align="center">
+			<div class="col-sm-4" sec:authorize="hasAnyRole('2','0')">
+				<h3 class="text-dark">営業対象一覧</h3>
+				<p>
+					営業情報を確認ことができます。
+				</p>
+				<a href="engineerListList"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+			<div class="col-sm-4" sec:authorize="hasAnyRole('2','0')">
+				<h3 class="text-dark">営業技術者稼働表</h3>
+				<p>いつも技術者情報を把握する。</p>
+				<a href="workingstatuslist"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="row" align="center">
+			<div class="col-sm-4" sec:authorize="hasRole('0')">
+				<h3 class="text-dark">権限管理</h3>
+				<p>
+				</p>
+				<a href="loginList"><input type="button" value="こちらへ" id="bt"></a>
+			</div>
+			
+		</div>
+
+		<hr>
+		<!-- <div class="footer"　align="center">
+			<table cellpadding="10" cellspacing="5" align="center">
+				<tr>
+					<br>
+					<td></td>
+					<th>株式会社ソフトユージング</th>
+				</tr>
+				<tr>
+					<td>個人情報保護について<br>個人情報の利用目的の公表に関する事項
+					<td>
+					<td>info@softusing.co.jp<br> info@softuseing.com(旧)<br>
+						(電話番号)03-6404-8788<br> (FAX)03-6404-8784<br> 〒140-0013<br>
+						東京都品川区南大井3-20-5 SU大森ビル
+					</td>
+				</tr>
+			</table>
+			<footer>
+				<i>&copy; 2019 Softusing.co.jp All rights reserved. Terms of use</i>
+			</footer>
+		</div>
+	</div> 
+	  -->
+
+</body>
+</html>

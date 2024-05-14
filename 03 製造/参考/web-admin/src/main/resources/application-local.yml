@@ -1,0 +1,12 @@
+spring:
+  profiles: local
+  thymeleaf:
+    cache: false
+
+server:
+  address: localhost
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: ../htdocs/thumb
