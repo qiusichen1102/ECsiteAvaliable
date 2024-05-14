@@ -1,3 +1,0 @@
-alter table tbl_product drop product_image;
-
-alter table empsystem modify column product_image BLOB default null;
